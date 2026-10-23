@@ -12,7 +12,7 @@ open Classical
 open FiniteTesting SortedPairing SignedDiagonalMoment EmpiricalSeeds
 open MultiBinSeeds MultiBinExterior SubsetSeedCompression
 
-theorem no_identityTest_of_general_allocation_coordinates {k : ℕ}
+theorem exists_general_allocation_prior {k : ℕ}
     (q : Probability (Fin k)) (x : Fin k → ℝ) (T ε : ℝ)
     (hT : 0 < T) (hq : ∀ i, 0 < q.mass i) (hx : ∀ i, 0 < x i ∧ x i < 1)
     (hcap : ∀ i, q.mass i ≤ (4 : ℝ) / 5)
@@ -20,7 +20,11 @@ theorem no_identityTest_of_general_allocation_coordinates {k : ℕ}
     (hbudget : T ^ 2 * (∑ i, (q.mass i) ^ 2 * (x i) ^ 4 / (1 - (x i) ^ 4)) = 1)
     (hε : (∑ i, q.mass i * x i) = ε)
     (n : ℕ) (hn0 : 0 < n) (hn : (n : ℝ) ≤ (1 / (10 : ℝ) ^ 12) * T) :
-    ¬ HasIdentityTest (extendFiniteLaw q) ε n := by
+    ∃ (I : Type) (_ : Fintype I) (ω : Probability I)
+      (P : I → Probability (Fin (k + 1))),
+      (∀ i, 0 < ω.mass i → ε < FiniteTesting.totalVariation (P i) (padFiniteLaw q)) ∧
+      FiniteTesting.totalVariation (mixture ω (fun i => productLaw (P i) n))
+        (productLaw (padFiniteLaw q) n) < 1 / 10000 := by
   have hk : k ≠ 0 := by
     intro hk
     subst k
@@ -149,7 +153,7 @@ theorem no_identityTest_of_general_allocation_coordinates {k : ℕ}
       (mixture ω (fun σ => productLaw (padFiniteLaw (ν σ)) n)) (productLaw r n) ≤
         (1 : ℝ) / 10 ^ 5 :=
     (padded_sample_mixture_tv_le ω ν q n).trans hνTV.le
-  have hcost : η + (1 : ℝ) / 10 ^ 5 < 1 / 3 := by
+  have hcost : η + (1 : ℝ) / 10 ^ 5 < 1 / 10000 := by
     have hd : 0 ≤ (n : ℝ) * ∑ i ∈ D, q.mass i :=
       mul_nonneg (Nat.cast_nonneg n) (Finset.sum_nonneg (fun i _ => q.nonneg i))
     have hscaled := mul_le_mul_of_nonneg_right hf3 hd
@@ -157,12 +161,28 @@ theorem no_identityTest_of_general_allocation_coordinates {k : ℕ}
     have hfsq : f ^ 2 ≤ 9 := by nlinarith only [hf1, hf3]
     have hfrac := div_le_div_of_nonneg_right hfsq (by norm_num : (0 : ℝ) ≤ 2 * 100000)
     dsimp only [η]
-    nlinarith only [hscaled, hsmall, hfrac, tilted_combined_cost_lt]
-  apply no_identityTest_of_padded_prior (productPrior ω τ) (fun ij => P ij.1 ij.2) q ε n
+    nlinarith only [hscaled, hsmall, hfrac]
+  refine ⟨I × (SeedIndex m → Fin (k + 1)), inferInstance,
+    productPrior ω τ, (fun ij => P ij.1 ij.2), ?_, ?_⟩
   · intro ij hij
     exact hsep ij.1 ij.2 ((productPrior_mass_pos_iff ω τ ij.1 ij.2).mp hij).2
   · exact (two_stage_sample_tv_le ω τ P (fun σ => padFiniteLaw (ν σ)) r n η
       ((1 : ℝ) / 10 ^ 5) (fun σ _ => hconditional σ) hbase).trans_lt hcost
+
+/-- The testing lower bound is obtained from the constructed strict prior. -/
+theorem no_identityTest_of_general_allocation_coordinates {k : ℕ}
+    (q : Probability (Fin k)) (x : Fin k → ℝ) (T ε : ℝ)
+    (hT : 0 < T) (hq : ∀ i, 0 < q.mass i) (hx : ∀ i, 0 < x i ∧ x i < 1)
+    (hcap : ∀ i, q.mass i ≤ (4 : ℝ) / 5)
+    (hgeom : ∀ i j, q.mass i ≤ q.mass j → q.mass i * x i ≤ q.mass j * x j)
+    (hbudget : T ^ 2 * (∑ i, (q.mass i) ^ 2 * (x i) ^ 4 / (1 - (x i) ^ 4)) = 1)
+    (hε : (∑ i, q.mass i * x i) = ε)
+    (n : ℕ) (hn0 : 0 < n) (hn : (n : ℝ) ≤ (1 / (10 : ℝ) ^ 12) * T) :
+    ¬ HasIdentityTest (extendFiniteLaw q) ε n := by
+  obtain ⟨I, inst, ω, P, hsep, htv⟩ :=
+    exists_general_allocation_prior q x T ε hT hq hx hcap hgeom hbudget hε n hn0 hn
+  letI := inst
+  exact no_identityTest_of_padded_prior ω P q ε n hsep (htv.trans (by norm_num))
 
 /-- The allocation coordinates and their ordering come from the actual optimizer
 at the original countable allocation root. No prior or separation certificate is

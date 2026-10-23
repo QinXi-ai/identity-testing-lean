@@ -46,7 +46,14 @@ by Xi Qin (Wuhan University).
 - **Explicit testing constants.** The concentrated-coordinate budget and moment
   bounds use `1/6` and `8/3`; the actual mean and collision tests satisfy the
   manuscript's `0.0576`, `0.0288`, `1.5e-6` and `0.006` error bounds, including
-  the sharper heavy-tail mean bounds.
+  the sharper heavy-tail mean bounds. The light-label moment branch has mean
+  errors below `0.0032` and `0.0016`, null collision error below `0.000051`,
+  and alternative collision miss probability below `0.013`.
+- **Explicit prior bounds.** The constructed general allocation prior has
+  sample-mixture total variation below `10^-4` and every positive-weight member
+  is strictly separated. Deterministic general and heavy tilts satisfy the
+  manuscript's square-root sample bounds. Dyadic seed compression permits
+  arbitrary positive masses and zero exterior mass, with the exact ceiling counts.
 - **Restricted-support lower bounds.** Heavy interior and near-exterior lower
   bounds remain valid when alternatives are restricted to the positive support.
 - **Effective countable evaluation.** Rational atom approximations and certified
@@ -60,6 +67,12 @@ by Xi Qin (Wuhan University).
 - **Binary arithmetic machines.** Fixed finite-control stack machines for
   addition, multiplication, subtraction, division, gcd and rational normalization,
   with proved termination, canonical outputs and polynomial primitive-action bounds.
+  Signed multiplication, comparison and negation include zero-sign handling.
+- **Actual rational instruction traces.** A finite-register program implements
+  coordinate bisection and scalar budget/objective accumulation. Its traces
+  record arithmetic and comparisons, with proved call counts and operand lengths.
+  These are rational-instruction bounds; the full bit-machine simulation remains
+  to be assembled.
 
 The statistical proof constructs tests for the point-mass, allocation, moment,
 and heavy-atom interior/exterior regimes, then transfers finite results to
@@ -114,6 +127,8 @@ Long division costs at most `210(bits(m)+bits(n)+1)^2` actions and gcd at most
 `400(bits(m)+bits(n)+1)^3`. For any integer `z` and positive denominator `d`,
 fraction normalization returns the exact reduced numerator and denominator of
 `z/d` in at most `9000(bits(|z|)+bits(d)+1)^3` actions.
+Signed multiplication costs at most `200(bits(|x|)+bits(|y|)+1)^2` actions,
+and signed comparison at most `11 max(bits(|x|),bits(|y|))+22`.
 
 ## Build and verify
 
@@ -169,6 +184,14 @@ covering all branches and a reordered reference. The audited proofs use only
 | [NormalizedTruncationLowerBound.lean](IdentityTesting/NormalizedTruncationLowerBound.lean) | Original normalized truncation and 100-batch transfer |
 | [AllocationBoundaryDerivative.lean](IdentityTesting/AllocationBoundaryDerivative.lean) | Infinite right derivative at zero allocation |
 | [HeavySharpErrors.lean](IdentityTesting/HeavySharpErrors.lean) | Explicit error constants for the general and heavy mean/collision tests |
+| [GeneralAllocationPrior.lean](IdentityTesting/GeneralAllocationPrior.lean) | Prior constructed from the reference and radius, with strict separation and sample-mixture TV below 10^-4 |
+| [MomentSharpErrors.lean](IdentityTesting/MomentSharpErrors.lean) | Explicit errors for the actual light-label mean and collision tests |
+| [HeavyTiltManuscriptBounds.lean](IdentityTesting/HeavyTiltManuscriptBounds.lean) | Exact square-root sample bound for interior heavy tilts |
+| [HeavyExteriorManuscriptBounds.lean](IdentityTesting/HeavyExteriorManuscriptBounds.lean) | Exact square-root sample bound for near-exterior tilts |
+| [DyadicMassSeedPrior.lean](IdentityTesting/DyadicMassSeedPrior.lean) | Arbitrary-mass seeds, exact bin counts and zero-exterior cases |
+| [BinarySignedMultiplierRuns.lean](IdentityTesting/BinarySignedMultiplierRuns.lean) | Actual signed multiplication and its quadratic primitive cost |
+| [BinarySignedComparison.lean](IdentityTesting/BinarySignedComparison.lean) | Actual signed comparison, including noncanonical zero words |
+| [RationalAlgorithmTraceCoordinateBounds.lean](IdentityTesting/RationalAlgorithmTraceCoordinateBounds.lean) | Coordinate program correctness, instruction counts and operand lengths |
 | [AllocationExplicitDerivatives.lean](IdentityTesting/AllocationExplicitDerivatives.lean) | Explicit first and second derivatives, with strict concavity on the simplex |
 | [AllocationExactTimeDecrease.lean](IdentityTesting/AllocationExactTimeDecrease.lean) | Exact time-decrease fraction and the constant-64 root window |
 | [OracleBudgetFamily.lean](IdentityTesting/OracleBudgetFamily.lean) | Full real parameter family, elasticities and unique optimizer |
