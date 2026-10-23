@@ -77,17 +77,24 @@ by Xi Qin (Wuhan University).
   Signed addition uses at most `400(bits(|x|)+bits(|y|)+1)` primitive actions.
   Signed subtraction is linear, and an actual rational multiplication machine
   returns the reduced fraction within `20000(L(p)+L(q)+1)^3` primitive actions.
+  Rational addition returns the canonical sum within
+  `1300000(L(p)+L(q)+1)^3` primitive actions.
 - **Register and workspace operations.** Actual symbol machines read and write
   delimited registers, split and join rational records, and clear arithmetic
   scratch stacks while preserving an output frame. Rational multiplication and
   scratch cleanup together cost at most `100000(L(p)+L(q)+1)^3` primitive actions.
+  Load and store use a shared physical record tape, with explicit costs in the
+  register encoding size and the loaded or stored rational length.
 - **Actual rational instruction traces.** A finite-register program implements
   coordinate bisection and the complete finite-vector budget/objective evaluator.
   Its output equals the original interval evaluator, with at most `k(21n+45)`
   arithmetic/comparison calls and `17+k` registers. Every actual operand,
   including partial sums and scratch values, has a proved polynomial length bound.
-  These are rational-instruction bounds; the full bit-machine simulation remains
-  to be assembled.
+  The outer search program also returns exactly the original allocation oracle's
+  result. Its arithmetic/comparison call count is polynomial in the original
+  input length, and its code size and register count have explicit bounds.
+  These are rational-instruction bounds; initialization, address generation and
+  the full bit-machine simulation remain to be assembled.
 - **Gaussian calculations.** Exact linear and diagonal quadratic exponential
   integrals, orthogonal invariance of the standard Gaussian vector, and the
   finite-sign/Gaussian interchange used in the signed-matrix argument. Quadratic
