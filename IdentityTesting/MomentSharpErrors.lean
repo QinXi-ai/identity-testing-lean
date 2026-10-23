@@ -4,7 +4,7 @@ import IdentityTesting.MomentUpperBound
 noncomputable section
 namespace IdentityTesting.MomentTesting
 open scoped BigOperators
-open Classical FiniteTesting FiniteAllocationUpper EventCounts CollisionTesting
+open Classical FiniteTesting FiniteIID ProfileTesting FiniteAllocationUpper EventCounts CollisionTesting
 variable {Ω : Type*} [Fintype Ω]
 
 theorem moment_light_sample_geometry (q : Probability Ω) {δ : ℝ} (hδ : 0 < δ)
@@ -145,5 +145,31 @@ theorem moment_actual_error_constants (q : Probability Ω) {δ : ℝ} (hδ : 0 <
       nlinarith only [hsignal, hscaled]
     have hsig : 1562500 ≤ (n : ℝ) ^ 2 * collisionMass2 p L := (mul_le_mul_iff_left₀ hδ).1 hprod
     exact (moment_repeat_miss_sharp p L n hn2 hsig).2
+
+theorem moment_combined_error_constants (q : Probability Ω) {δ : ℝ} (hδ : 0 < δ)
+    (hregime : 1000000000000 * δ < finiteOverlapMoment q δ)
+    (hv : eventMass q (heavyLabels q δ) < finiteOverlapMoment q δ / 2) :
+    let L := lightLabels q δ
+    let n := ⌈10000 / finiteOverlapMoment q δ⌉₊
+    expectation (productLaw q n) (weightedMeanRepeatTest q L n) < 3251 / 1000000 ∧
+    (∀ p : Probability Ω, 1 - δ < FiniteTesting.totalVariation p q →
+      1 - expectation (productLaw p n) (weightedMeanRepeatTest q L n) < 13 / 1000) := by
+  dsimp only
+  let L := lightLabels q δ
+  let n := ⌈10000 / finiteOverlapMoment q δ⌉₊
+  obtain ⟨hm, hc, ha, hr⟩ := moment_actual_error_constants q hδ hregime hv
+  constructor
+  · have hu := expectation_testMaximum_le (productLaw q n) (weightedMeanTest q L n) (repeatTest L n)
+    change expectation _ (testMaximum _ _) < _
+    linarith
+  · intro p hp
+    change 1 - expectation _ (testMaximum _ _) < _
+    by_cases hs : weightedMass p q L ≤ weightedMass q q L / 2
+    · have he := ha p hs
+      have hu := expectation_le_testMaximum_left (productLaw p n) (weightedMeanTest q L n) (repeatTest L n)
+      linarith
+    · have he := hr p hp (lt_of_not_ge hs)
+      have hu := expectation_le_testMaximum_right (productLaw p n) (weightedMeanTest q L n) (repeatTest L n)
+      linarith
 
 end IdentityTesting.MomentTesting

@@ -48,12 +48,15 @@ by Xi Qin (Wuhan University).
   manuscript's `0.0576`, `0.0288`, `1.5e-6` and `0.006` error bounds, including
   the sharper heavy-tail mean bounds. The light-label moment branch has mean
   errors below `0.0032` and `0.0016`, null collision error below `0.000051`,
-  and alternative collision miss probability below `0.013`.
+  and alternative collision miss probability below `0.013`. The combined test
+  has null error below `0.003251` and miss probability below `0.013`.
 - **Explicit prior bounds.** The constructed general allocation prior has
   sample-mixture total variation below `10^-4` and every positive-weight member
   is strictly separated. Deterministic general and heavy tilts satisfy the
   manuscript's square-root sample bounds. Dyadic seed compression permits
   arbitrary positive masses and zero exterior mass, with the exact ceiling counts.
+  The small-scale heavy tilt has sample TV below `1/50`; feasible heavy
+  compression has the original overlap bound below `(E+g)/100`.
 - **Restricted-support lower bounds.** Heavy interior and near-exterior lower
   bounds remain valid when alternatives are restricted to the positive support.
 - **Effective countable evaluation.** Rational atom approximations and certified
@@ -64,6 +67,9 @@ by Xi Qin (Wuhan University).
 - **Normalized truncation.** Exact total variation and scaling identities,
   the heavy-boundary limit, and transfer of tests through 100 independent
   randomized batches with error at most `exp(-25/8) < 1/3`.
+- **Pooling loss.** The exact TV loss after pooling any finite set is half the
+  tail absolute-difference loss, equivalently the smaller residual mass minus
+  the residual overlap. In particular it lies between zero and that residual mass.
 - **Binary arithmetic machines.** Fixed finite-control stack machines for
   addition, multiplication, subtraction, division, gcd and rational normalization,
   with proved termination, canonical outputs and polynomial primitive-action bounds.

@@ -114,3 +114,6 @@ import IdentityTesting.HeavyTiltManuscriptBounds
 import IdentityTesting.HeavyExteriorManuscriptBounds
 import IdentityTesting.GeneralAllocationPrior
 import IdentityTesting.MomentSharpErrors
+import IdentityTesting.HeavyCompressionSmallOverlap
+import IdentityTesting.PoolingExactLoss
+import IdentityTesting.GaussianProductBound

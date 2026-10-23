@@ -379,3 +379,23 @@ open IdentityTesting.RationalComputation
 #print axioms IdentityTesting.MomentTesting.moment_repeat_miss_sharp
 #check @IdentityTesting.MomentTesting.moment_actual_error_constants
 #print axioms IdentityTesting.MomentTesting.moment_actual_error_constants
+#check @IdentityTesting.FiniteTesting.totalVariation_productLaw_le
+#print axioms IdentityTesting.FiniteTesting.totalVariation_productLaw_le
+#check @IdentityTesting.HeavyTilt.small_heavy_tilt_sample_bound
+#print axioms IdentityTesting.HeavyTilt.small_heavy_tilt_sample_bound
+#check @IdentityTesting.HeavyTilt.large_count_rounding_constants
+#print axioms IdentityTesting.HeavyTilt.large_count_rounding_constants
+#check @IdentityTesting.HeavyCompressionFeasible.compression_small_overlap_scalar
+#print axioms IdentityTesting.HeavyCompressionFeasible.compression_small_overlap_scalar
+#check @IdentityTesting.HeavyCompressionFeasible.exists_feasible_small_overlap_prior
+#print axioms IdentityTesting.HeavyCompressionFeasible.exists_feasible_small_overlap_prior
+#check @IdentityTesting.pooledLaw_tv_loss_eq_overlap
+#print axioms IdentityTesting.pooledLaw_tv_loss_eq_overlap
+#check @IdentityTesting.pooledLaw_tv_loss_eq_abs
+#print axioms IdentityTesting.pooledLaw_tv_loss_eq_abs
+#check @IdentityTesting.pooledLaw_tv_loss_bounds
+#print axioms IdentityTesting.pooledLaw_tv_loss_bounds
+#check @IdentityTesting.MomentTesting.moment_combined_error_constants
+#print axioms IdentityTesting.MomentTesting.moment_combined_error_constants
+#check @IdentityTesting.GeneralSignedMatrix.inverse_sqrt_product_le_exp_sum
+#print axioms IdentityTesting.GeneralSignedMatrix.inverse_sqrt_product_le_exp_sum
