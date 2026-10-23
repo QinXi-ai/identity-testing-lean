@@ -94,3 +94,7 @@ import IdentityTesting.HeavyCompressionPrior
 import IdentityTesting.FiniteCapCorollary
 import IdentityTesting.HeavyClosedCharacterization
 import IdentityTesting.OracleBudgetFamily
+import IdentityTesting.OracleExactStopping
+import IdentityTesting.HeavyRestrictedSupport
+import IdentityTesting.AllocationBoundaryDerivative
+import IdentityTesting.BinaryRationalNormalization

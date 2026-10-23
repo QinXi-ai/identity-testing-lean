@@ -36,11 +36,15 @@ by Xi Qin (Wuhan University).
   matrix total-variation bound and its explicit heavy-atom Frobenius constant.
 - **Allocation analysis.** Strict concavity, explicit derivatives, the sharp
   finite-dimensional Hölder envelope, the original time-decrease window, and
-  the real oracle family's continuity, monotonicity, range and elasticities.
+  the real oracle family's continuity, monotonicity, range and elasticities,
+  parameter-ratio bounds and certified stopping windows. The right derivative
+  diverges at zero allocation.
   Feasible heavy-tail compression has the original `1024` and strict `16/T` bounds.
+- **Restricted-support lower bounds.** Heavy interior and near-exterior lower
+  bounds remain valid when alternatives are restricted to the positive support.
 - **Binary arithmetic machines.** Fixed finite-control stack machines for
-  addition and multiplication, with proved termination, correct binary outputs,
-  and explicit polynomial bounds on primitive bit actions.
+  addition, multiplication, subtraction, division, gcd and rational normalization,
+  with proved termination, canonical outputs and polynomial primitive-action bounds.
 
 The statistical proof constructs tests for the point-mass, allocation, moment,
 and heavy-atom interior/exterior regimes, then transfers finite results to
@@ -80,8 +84,8 @@ as well.
 
 These statements refer to the executable Lean definitions. The coordinate
 routine bisects `[0,1]` and clips the upper endpoint to `1−ρ`; its correctness
-is proved for this implementation. Rational normalization and composition of
-the remaining arithmetic operations through the full algorithm must still be
+is proved for this implementation. Composition of the remaining signed rational
+arithmetic operations through the full algorithm must still be
 proved before a polynomial bit-operation complexity theorem can be claimed.
 
 The separate bit-stack machines add binary inputs `m,n` in at most
@@ -89,6 +93,11 @@ The separate bit-stack machines add binary inputs `m,n` in at most
 `140 bits(m)(bits(m)+bits(n)+1)+7`. Their transitions operate on individual
 Boolean stack cells and finite registers. These bounds concern that explicit
 machine model, not Lean's native integer runtime.
+
+Long division costs at most `210(bits(m)+bits(n)+1)^2` actions and gcd at most
+`400(bits(m)+bits(n)+1)^3`. For any integer `z` and positive denominator `d`,
+fraction normalization returns the exact reduced numerator and denominator of
+`z/d` in at most `9000(bits(|z|)+bits(d)+1)^3` actions.
 
 ## Build and verify
 
@@ -136,6 +145,10 @@ covering all branches and a reordered reference. The audited proofs use only
 | [RationalComplexityEncoding.lean](IdentityTesting/RationalComplexityEncoding.lean) | Full algorithm output-size bound |
 | [BinaryAdderMachine.lean](IdentityTesting/BinaryAdderMachine.lean) | Fixed-stack addition machine |
 | [BinaryMultiplierBound.lean](IdentityTesting/BinaryMultiplierBound.lean) | Fixed-stack multiplication machine and cost bound |
+| [BinaryRationalNormalization.lean](IdentityTesting/BinaryRationalNormalization.lean) | Actual fraction reduction, canonical outputs and cubic bit cost |
+| [OracleExactStopping.lean](IdentityTesting/OracleExactStopping.lean) | Aggregate elasticities, parameter ratios and exact stopping windows |
+| [HeavyRestrictedSupport.lean](IdentityTesting/HeavyRestrictedSupport.lean) | Lower bounds for alternatives on the positive support |
+| [AllocationBoundaryDerivative.lean](IdentityTesting/AllocationBoundaryDerivative.lean) | Infinite right derivative at zero allocation |
 | [AllocationExplicitDerivatives.lean](IdentityTesting/AllocationExplicitDerivatives.lean) | Explicit first and second derivatives, with strict concavity on the simplex |
 | [AllocationExactTimeDecrease.lean](IdentityTesting/AllocationExactTimeDecrease.lean) | Exact time-decrease fraction and the constant-64 root window |
 | [OracleBudgetFamily.lean](IdentityTesting/OracleBudgetFamily.lean) | Full real parameter family, elasticities and unique optimizer |
