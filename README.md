@@ -30,6 +30,12 @@ by Xi Qin (Wuhan University).
   `k^(2/5)/R`, including its exterior minimum transition.
 - **Minimum sample counts.** A natural-number minimum in the original test
   model, its universal scale comparison, and the exact point-mass formula.
+- **General roots and signed mixtures.** Existence and continuity of roots for
+  arbitrary nonnegative summable mass vectors; the general signed-likelihood
+  matrix total-variation bound and its explicit heavy-atom Frobenius constant.
+- **Binary arithmetic machines.** Fixed finite-control stack machines for
+  addition and multiplication, with proved termination, correct binary outputs,
+  and explicit polynomial bounds on primitive bit actions.
 
 The statistical proof constructs tests for the point-mass, allocation, moment,
 and heavy-atom interior/exterior regimes, then transfers finite results to
@@ -38,8 +44,8 @@ oracles, certified root searches, maximum-atom selection, and moment intervals.
 
 **Scope:** polynomial bit-operation complexity is not formalized here. Executable
 definitions and proved termination do not establish a polynomial-time bound.
-This repository formalizes the core results, not every auxiliary claim or example
-in the manuscript.
+Some auxiliary manuscript claims and the complete arithmetic/algorithm cost
+composition remain unfinished.
 
 ### Representation-size bounds
 
@@ -61,11 +67,23 @@ An instrumented search returns the same interval and records at most `30S+128`
 source-level budget/objective calls; every recorded parameter has length at most `180S+737`.
 Each returned endpoint has length at most `368S²+1778S+25`.
 
+For the full interval algorithm, put `T = V(q)+L(ε)`. Each returned endpoint has
+length at most `288T²+2536T+5355`. Both root searches have linear bounds on
+their source-level oracle-call counts, query lengths, and tolerances in their
+own input lengths. Square-root and moment interval representations are bounded
+as well.
+
 These statements refer to the executable Lean definitions. The coordinate
 routine bisects `[0,1]` and clips the upper endpoint to `1−ρ`; its correctness
-is proved for this implementation. The cost of integer arithmetic, rational
-normalization, and composition through the full root/branch algorithm remains
-to be proved before a polynomial bit-operation complexity theorem can be claimed.
+is proved for this implementation. Rational normalization and composition of
+the remaining arithmetic operations through the full algorithm must still be
+proved before a polynomial bit-operation complexity theorem can be claimed.
+
+The separate bit-stack machines add binary inputs `m,n` in at most
+`50 max(bits(m),bits(n))+20` primitive actions and multiply them in at most
+`140 bits(m)(bits(m)+bits(n)+1)+7`. Their transitions operate on individual
+Boolean stack cells and finite registers. These bounds concern that explicit
+machine model, not Lean's native integer runtime.
 
 ## Build and verify
 
@@ -108,6 +126,12 @@ covering all branches and a reordered reference. The audited proofs use only
 | [UniformExamples.lean](IdentityTesting/UniformExamples.lean) | Uniform root formulas and statistical scales |
 | [FlatTailExamples.lean](IdentityTesting/FlatTailExamples.lean) | Flat-tail roots, quantitative bounds, and statistical scales |
 | [MinimumSampleComplexity.lean](IdentityTesting/MinimumSampleComplexity.lean) | Literal minimum-sample characterization |
+| [GeneralRootContinuity.lean](IdentityTesting/GeneralRootContinuity.lean) | General summable-vector roots and convergence |
+| [GeneralSignedMatrixHeavy.lean](IdentityTesting/GeneralSignedMatrixHeavy.lean) | General signed-mixture TV theorem and heavy-atom constants |
+| [RationalComplexityEncoding.lean](IdentityTesting/RationalComplexityEncoding.lean) | Full algorithm output-size bound |
+| [BinaryAdderMachine.lean](IdentityTesting/BinaryAdderMachine.lean) | Fixed-stack addition machine |
+| [BinaryMultiplierBound.lean](IdentityTesting/BinaryMultiplierBound.lean) | Fixed-stack multiplication machine and cost bound |
+| [AllocationExplicitDerivatives.lean](IdentityTesting/AllocationExplicitDerivatives.lean) | Explicit first and second derivatives, with strict concavity on the simplex |
 | [Target.lean](IdentityTesting/Target.lean) | Allocation, moment, root, and scale definitions |
 | [CountableModel.lean](IdentityTesting/CountableModel.lean) | Statistical model |
 | [Verification.lean](Verification.lean) | Type, axiom, and execution audit |

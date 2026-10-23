@@ -82,3 +82,8 @@ import IdentityTesting.AllocationScaling
 import IdentityTesting.UniformExamples
 import IdentityTesting.FlatTailExamples
 import IdentityTesting.MinimumSampleComplexity
+import IdentityTesting.GeneralRootContinuity
+import IdentityTesting.BinaryMultiplierBound
+import IdentityTesting.RationalComplexityEncoding
+import IdentityTesting.GeneralSignedMatrixHeavy
+import IdentityTesting.AllocationExplicitDerivatives
