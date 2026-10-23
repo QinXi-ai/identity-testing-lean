@@ -75,3 +75,6 @@ import IdentityTesting.ComplexityScaleRounding
 import IdentityTesting.AllocationHolderBound
 import IdentityTesting.CountableCharacterizationRealScale
 import IdentityTesting.RationalOracleEvaluationEncoding
+import IdentityTesting.RationalOracleResourceBounds
+import IdentityTesting.OverlapMomentJointContinuity
+import IdentityTesting.CountableRelabeling

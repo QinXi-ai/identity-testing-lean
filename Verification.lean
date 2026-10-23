@@ -76,3 +76,36 @@ open IdentityTesting.RationalComputation
         rationalEncodingLength (coordinateQuery (1 / 2) 1 32))
 #eval let I := oracleBudgetInterval ![(1 : ℚ) / 2, 1 / 2] 1 1 (1 / 128) 16
       (rationalEncodingLength I.1, rationalEncodingLength I.2)
+
+#print allocationOracleInputLength
+#check allocationOracle_eq_boundedPrecision
+#check allocationOracle_output_encoding_le
+#check allocationOracleWithTrace_result
+#check allocationOracleWithTrace_length
+#check allocationOracleWithTrace_encoding_le
+#check allocationOracleBudget_encoding_le
+#check allocationOracle_coordinate_polynomial_encoding_le
+#print axioms allocationOracle_eq_boundedPrecision
+#print axioms allocationOracle_output_encoding_le
+#print axioms allocationOracleWithTrace_result
+#print axioms allocationOracleWithTrace_length
+#print axioms allocationOracleWithTrace_encoding_le
+#print axioms allocationOracleBudget_encoding_le
+#print axioms allocationOracle_coordinate_polynomial_encoding_le
+
+#check IdentityTesting.overlapMoment_summand_abs_sub_le
+#check IdentityTesting.overlapMoment_sum_abs_sub_le
+#check IdentityTesting.overlapMoment_sum_tendsto_l1_targets
+#check IdentityTesting.overlapMoment_tendsto_l1_targets
+#check IdentityTesting.countable_relabeling_functionals
+#print axioms IdentityTesting.overlapMoment_summand_abs_sub_le
+#print axioms IdentityTesting.overlapMoment_sum_abs_sub_le
+#print axioms IdentityTesting.overlapMoment_sum_tendsto_l1_targets
+#print axioms IdentityTesting.overlapMoment_tendsto_l1_targets
+#print axioms IdentityTesting.countable_relabeling_functionals
+
+#eval let a : Fin 1 → ℚ := fun _ => 1
+      let r := allocationOracleWithTrace a 1 (1 / 2)
+      (allocationOracleInputLength a 1 (1 / 2), r.2.length,
+        (r.2.map rationalEncodingLength).foldl max 0,
+        r.1 == allocationOracle a 1 (1 / 2))
