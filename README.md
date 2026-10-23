@@ -96,6 +96,10 @@ by Xi Qin (Wuhan University).
   A multiplication instruction performs both loads, arithmetic, writeback and
   cleanup in one machine; all arithmetic and IO scratch stacks finish empty.
   Its source and destination addresses are supplied as unary tapes.
+  One shared load/operate/store interpreter handles all six register operations
+  (copy, addition, subtraction, multiplication, division and comparison), with
+  exact instruction semantics and a uniform polynomial primitive-action bound.
+  Its arithmetic workspace cleanup and whole-program dispatch are separate obligations.
 - **Actual rational instruction traces.** A finite-register program implements
   coordinate bisection and the complete finite-vector budget/objective evaluator.
   Its output equals the original interval evaluator, with at most `k(21n+45)`

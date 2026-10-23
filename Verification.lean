@@ -570,3 +570,10 @@ open IdentityTesting.RationalComputation
 #print axioms IdentityTesting.RationalComputation.OraclePreparationField.program_operands
 #check @IdentityTesting.RationalComputation.OraclePreparationField.program_state_tape_encoding
 #print axioms IdentityTesting.RationalComputation.OraclePreparationField.program_state_tape_encoding
+
+#print IdentityTesting.BinaryInterpreterArithmetic.arithmeticLayout
+#print IdentityTesting.BinaryInterpreterArithmetic.registerInstruction
+#check @IdentityTesting.BinaryInterpreterArithmetic.actual_local_run
+#print axioms IdentityTesting.BinaryInterpreterArithmetic.actual_local_run
+#check @IdentityTesting.BinaryInterpreterArithmetic.binary_register_instruction
+#print axioms IdentityTesting.BinaryInterpreterArithmetic.binary_register_instruction
