@@ -77,6 +77,10 @@ by Xi Qin (Wuhan University).
   Signed addition uses at most `400(bits(|x|)+bits(|y|)+1)` primitive actions.
   Signed subtraction is linear, and an actual rational multiplication machine
   returns the reduced fraction within `20000(L(p)+L(q)+1)^3` primitive actions.
+- **Register and workspace operations.** Actual symbol machines read and write
+  delimited registers, split and join rational records, and clear arithmetic
+  scratch stacks while preserving an output frame. Rational multiplication and
+  scratch cleanup together cost at most `100000(L(p)+L(q)+1)^3` primitive actions.
 - **Actual rational instruction traces.** A finite-register program implements
   coordinate bisection and the complete finite-vector budget/objective evaluator.
   Its output equals the original interval evaluator, with at most `k(21n+45)`
@@ -86,7 +90,8 @@ by Xi Qin (Wuhan University).
   to be assembled.
 - **Gaussian calculations.** Exact linear and diagonal quadratic exponential
   integrals, orthogonal invariance of the standard Gaussian vector, and the
-  finite-sign/Gaussian interchange used in the signed-matrix argument.
+  finite-sign/Gaussian interchange used in the signed-matrix argument. Quadratic
+  integration and integrability are proved for a supplied orthonormal eigenbasis.
 
 The statistical proof constructs tests for the point-mass, allocation, moment,
 and heavy-atom interior/exterior regimes, then transfers finite results to
