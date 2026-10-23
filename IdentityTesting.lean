@@ -117,3 +117,6 @@ import IdentityTesting.MomentSharpErrors
 import IdentityTesting.HeavyCompressionSmallOverlap
 import IdentityTesting.PoolingExactLoss
 import IdentityTesting.GaussianProductBound
+import IdentityTesting.GaussianDiagonalIntegral
+import IdentityTesting.BinarySignedAdderBound
+import IdentityTesting.BinaryRationalArithmeticWords

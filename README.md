@@ -73,7 +73,8 @@ by Xi Qin (Wuhan University).
 - **Binary arithmetic machines.** Fixed finite-control stack machines for
   addition, multiplication, subtraction, division, gcd and rational normalization,
   with proved termination, canonical outputs and polynomial primitive-action bounds.
-  Signed multiplication, comparison and negation include zero-sign handling.
+  Signed addition, multiplication, comparison and negation include zero-sign handling.
+  Signed addition uses at most `400(bits(|x|)+bits(|y|)+1)` primitive actions.
 - **Actual rational instruction traces.** A finite-register program implements
   coordinate bisection and scalar budget/objective accumulation. Its traces
   record arithmetic and comparisons, with proved call counts and operand lengths.

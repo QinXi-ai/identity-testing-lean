@@ -399,3 +399,13 @@ open IdentityTesting.RationalComputation
 #print axioms IdentityTesting.MomentTesting.moment_combined_error_constants
 #check @IdentityTesting.GeneralSignedMatrix.inverse_sqrt_product_le_exp_sum
 #print axioms IdentityTesting.GeneralSignedMatrix.inverse_sqrt_product_le_exp_sum
+#check @IdentityTesting.GeneralSignedMatrix.gaussian_quadratic_integral
+#print axioms IdentityTesting.GeneralSignedMatrix.gaussian_quadratic_integral
+#check @IdentityTesting.GeneralSignedMatrix.gaussian_diagonal_quadratic_integral_det
+#print axioms IdentityTesting.GeneralSignedMatrix.gaussian_diagonal_quadratic_integral_det
+#check @IdentityTesting.BinarySignedAdder.binary_signed_addition_machine
+#print axioms IdentityTesting.BinarySignedAdder.binary_signed_addition_machine
+#check @IdentityTesting.BinaryRationalArithmetic.encode_value
+#print axioms IdentityTesting.BinaryRationalArithmetic.encode_value
+#check @IdentityTesting.BinaryRationalArithmetic.encode_length
+#print axioms IdentityTesting.BinaryRationalArithmetic.encode_length
