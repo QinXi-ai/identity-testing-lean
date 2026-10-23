@@ -99,7 +99,11 @@ by Xi Qin (Wuhan University).
   One shared load/operate/store interpreter handles all six register operations
   (copy, addition, subtraction, multiplication, division and comparison), with
   exact instruction semantics and a uniform polynomial primitive-action bound.
-  Its arithmetic workspace cleanup and whole-program dispatch are separate obligations.
+  The same interpreter has a proved physical cleanup phase for all six operations:
+  the result tape is preserved and every arithmetic and IO scratch stack is empty.
+  The total bound is `3000*T + 100000000*S^3`, where `T` is the register-tape
+  encoding size and `S` is the sum of operand lengths plus one. Whole-program
+  dispatch and code-field materialization remain to be assembled.
 - **Actual rational instruction traces.** A finite-register program implements
   coordinate bisection and the complete finite-vector budget/objective evaluator.
   Its output equals the original interval evaluator, with at most `k(21n+45)`
