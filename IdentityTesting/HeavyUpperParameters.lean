@@ -7,7 +7,7 @@ namespace IdentityTesting.HeavyUpper
 open FiniteTesting FiniteAllocationUpper CollisionTesting
 variable {Ω : Type*} [Fintype Ω] [DecidableEq Ω]
 
-theorem heavy_actual_parameters (q : Probability Ω) (a : Ω) (x : Ω → ℝ) (T β g : ℝ)
+theorem heavy_actual_parameters_with_geometry (q : Probability Ω) (a : Ω) (x : Ω → ℝ) (T β g : ℝ)
     (hT : 4 ≤ T) (hβ : 0 < β) (hg : 0 ≤ g) (hTg : 1 ≤ T * g)
     (hx : ∀ i, 0 ≤ x i ∧ x i ≤ 1)
     (hkkt : ∀ i, (tailWeights q a).mass i * x i ^ 3 = β * (1 - x i ^ 4) ^ 2)
@@ -22,7 +22,8 @@ theorem heavy_actual_parameters (q : Probability Ω) (a : Ω) (x : Ω → ℝ) (
       0 ≤ w ∧ (∀ i ∈ L, Real.sqrt (q.mass i) ≤ w) ∧
       200 * w ≤ (m : ℝ) * A ∧ 8 * w * E ≤ A ∧
       (m : ℝ) ^ 2 * collisionMass2 q L ≤ 1 / 100 ∧
-      32000000 * E ≤ (m : ℝ) ^ 2 * A ^ 2 := by
+      32000000 * E ≤ (m : ℝ) ^ 2 * A ^ 2 ∧
+      w ≤ 6 * upperEta * T * A ∧ T ^ 2 * collisionMass2 q L ≤ 288 * upperEta := by
   dsimp only
   let Q := tailWeights q a
   let L := fineLabels a x upperEta
@@ -112,6 +113,34 @@ theorem heavy_actual_parameters (q : Probability Ω) (a : Ω) (x : Ω → ℝ) (
     have hmSig := mul_le_mul_of_nonneg_right hmSq (sq_nonneg A)
     have hbound := mul_le_mul_of_nonneg_left hscale1 (by norm_num : (0 : ℝ) ≤ 100000000)
     nlinarith only [hmSig, hbound, hE0]
-  exact ⟨hm2, hE, hA, w, hw0, hw, hmean, hsmall, hnull, hsignal⟩
+  have hwsharp : w ≤ 6 * upperEta * T * A := by
+    have hη0 : 0 ≤ upperEta := by norm_num [upperEta]
+    have he := mul_le_mul_of_nonneg_left hTE
+      (by positivity : 0 ≤ 24 * upperEta * Real.sqrt β)
+    have ha := mul_le_mul_of_nonneg_left hAlower
+      (by positivity : 0 ≤ 6 * upperEta * T)
+    dsimp [w]
+    nlinarith only [he, ha]
+  exact ⟨hm2, hE, hA, w, hw0, hw, hmean, hsmall, hnull, hsignal, hwsharp, hTq2⟩
+
+theorem heavy_actual_parameters (q : Probability Ω) (a : Ω) (x : Ω → ℝ) (T β g : ℝ)
+    (hT : 4 ≤ T) (hβ : 0 < β) (hg : 0 ≤ g) (hTg : 1 ≤ T * g)
+    (hx : ∀ i, 0 ≤ x i ∧ x i ≤ 1)
+    (hkkt : ∀ i, (tailWeights q a).mass i * x i ^ 3 = β * (1 - x i ^ 4) ^ 2)
+    (hbudget : 1 = T ^ 2 * β * ∑ i, (tailWeights q a).mass i * x i * (1 - x i ^ 4))
+    (hcase : coarseDisplacement (tailWeights q a) x upperEta + g <
+      2 * concentratedResidual (tailWeights q a) x upperEta) :
+    let L := fineLabels a x upperEta
+    let E := concentratedResidual (tailWeights q a) x upperEta
+    let A := weightedMass q q L
+    let m := ⌈10000 * T⌉₊
+    2 ≤ m ∧ 0 < E ∧ 0 < A ∧ ∃ w : ℝ,
+      0 ≤ w ∧ (∀ i ∈ L, Real.sqrt (q.mass i) ≤ w) ∧
+      200 * w ≤ (m : ℝ) * A ∧ 8 * w * E ≤ A ∧
+      (m : ℝ) ^ 2 * collisionMass2 q L ≤ 1 / 100 ∧
+      32000000 * E ≤ (m : ℝ) ^ 2 * A ^ 2 := by
+  obtain ⟨hm, hE, hA, w, hw, hcap, hmean, hsmall, hnull, hsignal, _⟩ :=
+    heavy_actual_parameters_with_geometry q a x T β g hT hβ hg hTg hx hkkt hbudget hcase
+  exact ⟨hm, hE, hA, w, hw, hcap, hmean, hsmall, hnull, hsignal⟩
 
 end IdentityTesting.HeavyUpper

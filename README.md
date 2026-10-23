@@ -34,14 +34,29 @@ by Xi Qin (Wuhan University).
 - **General roots and signed mixtures.** Existence and continuity of roots for
   arbitrary nonnegative summable mass vectors; the general signed-likelihood
   matrix total-variation bound and its explicit heavy-atom Frobenius constant.
+- **Arbitrary probability priors.** The testing-error inequality holds for
+  measurable probability-measure priors on laws on the natural numbers, with
+  an integral mixture and an almost-everywhere strict-alternative condition.
 - **Allocation analysis.** Strict concavity, explicit derivatives, the sharp
   finite-dimensional Hölder envelope, the original time-decrease window, and
   the real oracle family's continuity, monotonicity, range and elasticities,
   parameter-ratio bounds and certified stopping windows. The right derivative
   diverges at zero allocation.
   Feasible heavy-tail compression has the original `1024` and strict `16/T` bounds.
+- **Explicit testing constants.** The concentrated-coordinate budget and moment
+  bounds use `1/6` and `8/3`; the actual mean and collision tests satisfy the
+  manuscript's `0.0576`, `0.0288`, `1.5e-6` and `0.006` error bounds, including
+  the sharper heavy-tail mean bounds.
 - **Restricted-support lower bounds.** Heavy interior and near-exterior lower
   bounds remain valid when alternatives are restricted to the positive support.
+- **Effective countable evaluation.** Rational atom approximations and certified
+  vanishing tail bounds give executable interval algorithms for the allocation
+  functional, both positive roots and the overlap moment. The root and moment
+  endpoints converge to the original infinite-support quantities. The heavy
+  evaluator retains the full tail mass.
+- **Normalized truncation.** Exact total variation and scaling identities,
+  the heavy-boundary limit, and transfer of tests through 100 independent
+  randomized batches with error at most `exp(-25/8) < 1/3`.
 - **Binary arithmetic machines.** Fixed finite-control stack machines for
   addition, multiplication, subtraction, division, gcd and rational normalization,
   with proved termination, canonical outputs and polynomial primitive-action bounds.
@@ -51,8 +66,9 @@ and heavy-atom interior/exterior regimes, then transfers finite results to
 countable references. The evaluation algorithm includes rational allocation
 oracles, certified root searches, maximum-atom selection, and moment intervals.
 
-**Scope:** polynomial bit-operation complexity is not formalized here. Executable
-definitions and proved termination do not establish a polynomial-time bound.
+**Scope:** a polynomial bit-operation bound for the complete evaluation algorithm
+is not yet formalized. Executable definitions and proved termination alone do
+not establish a polynomial-time bound.
 Some auxiliary manuscript claims and the complete arithmetic/algorithm cost
 composition remain unfinished.
 
@@ -148,7 +164,11 @@ covering all branches and a reordered reference. The audited proofs use only
 | [BinaryRationalNormalization.lean](IdentityTesting/BinaryRationalNormalization.lean) | Actual fraction reduction, canonical outputs and cubic bit cost |
 | [OracleExactStopping.lean](IdentityTesting/OracleExactStopping.lean) | Aggregate elasticities, parameter ratios and exact stopping windows |
 | [HeavyRestrictedSupport.lean](IdentityTesting/HeavyRestrictedSupport.lean) | Lower bounds for alternatives on the positive support |
+| [EffectiveCountableCertificates.lean](IdentityTesting/EffectiveCountableCertificates.lean) | Executable countable intervals and endpoint convergence |
+| [MeasurePrior.lean](IdentityTesting/MeasurePrior.lean) | Arbitrary measurable-prior testing inequality on Nat samples |
+| [NormalizedTruncationLowerBound.lean](IdentityTesting/NormalizedTruncationLowerBound.lean) | Original normalized truncation and 100-batch transfer |
 | [AllocationBoundaryDerivative.lean](IdentityTesting/AllocationBoundaryDerivative.lean) | Infinite right derivative at zero allocation |
+| [HeavySharpErrors.lean](IdentityTesting/HeavySharpErrors.lean) | Explicit error constants for the general and heavy mean/collision tests |
 | [AllocationExplicitDerivatives.lean](IdentityTesting/AllocationExplicitDerivatives.lean) | Explicit first and second derivatives, with strict concavity on the simplex |
 | [AllocationExactTimeDecrease.lean](IdentityTesting/AllocationExactTimeDecrease.lean) | Exact time-decrease fraction and the constant-64 root window |
 | [OracleBudgetFamily.lean](IdentityTesting/OracleBudgetFamily.lean) | Full real parameter family, elasticities and unique optimizer |

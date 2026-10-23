@@ -14,7 +14,7 @@ def upperEta : ℝ := 1 / 10000000000000000
 universe u
 variable {Ω : Type u} [Fintype Ω] [DecidableEq Ω]
 
-theorem concentrated_actual_parameters (q : Probability Ω) (x : Ω → ℝ) (T β ε : ℝ)
+theorem concentrated_actual_parameters_with_geometry (q : Probability Ω) (x : Ω → ℝ) (T β ε : ℝ)
     (hT : (1 : ℝ) / 2 ≤ T) (hβ : 0 < β) (hx : ∀ i, 0 ≤ x i ∧ x i ≤ 1)
     (hkkt : ∀ i, q.mass i * x i ^ 3 = β * (1 - x i ^ 4) ^ 2)
     (hbudget : 1 = T ^ 2 * β * ∑ i, q.mass i * x i * (1 - x i ^ 4))
@@ -29,7 +29,8 @@ theorem concentrated_actual_parameters (q : Probability Ω) (x : Ω → ℝ) (T 
       0 ≤ w ∧ (∀ i ∈ L, Real.sqrt (q.mass i) ≤ w) ∧
       200 * w ≤ (m : ℝ) * A ∧ 8 * w * E ≤ A ∧
       (m : ℝ) ^ 2 * collisionMass2 q L ≤ 1 / 100 ∧
-      32000000 * E ≤ (m : ℝ) ^ 2 * A ^ 2 := by
+      32000000 * E ≤ (m : ℝ) ^ 2 * A ^ 2 ∧
+      w ≤ 18 * T * A ∧ T ^ 2 * collisionMass2 q L ≤ 288 * upperEta := by
   dsimp only
   let L := concentratedLabels x upperEta
   let E := concentratedResidual q x upperEta
@@ -126,6 +127,26 @@ theorem concentrated_actual_parameters (q : Probability Ω) (x : Ω → ℝ) (T 
     have hmSig := mul_le_mul_of_nonneg_right hmSq (sq_nonneg A)
     have hbound := mul_le_mul_of_nonneg_left hscale1 (by norm_num : (0 : ℝ) ≤ 100000000)
     nlinarith only [hmSig, hbound, hE0]
-  exact ⟨hm2, hE, hA, w, hw0, hw, hmean, hsmall, hnull, hsignal⟩
+  exact ⟨hm2, hE, hA, w, hw0, hw, hmean, hsmall, hnull, hsignal, hwratio, hTq2⟩
+
+theorem concentrated_actual_parameters (q : Probability Ω) (x : Ω → ℝ) (T β ε : ℝ)
+    (hT : (1 : ℝ) / 2 ≤ T) (hβ : 0 < β) (hx : ∀ i, 0 ≤ x i ∧ x i ≤ 1)
+    (hkkt : ∀ i, q.mass i * x i ^ 3 = β * (1 - x i ^ 4) ^ 2)
+    (hbudget : 1 = T ^ 2 * β * ∑ i, q.mass i * x i * (1 - x i ^ 4))
+    (hradius : (∑ i, q.mass i * x i) = ε)
+    (hmax : ∀ i, q.mass i ≤ 2 * (1 - ε))
+    (hD : coarseDisplacement q x upperEta ≤ 2 * concentratedResidual q x upperEta) :
+    let L := concentratedLabels x upperEta
+    let E := concentratedResidual q x upperEta
+    let A := weightedMass q q L
+    let m := ⌈10000 * T⌉₊
+    2 ≤ m ∧ 0 < E ∧ 0 < A ∧ ∃ w : ℝ,
+      0 ≤ w ∧ (∀ i ∈ L, Real.sqrt (q.mass i) ≤ w) ∧
+      200 * w ≤ (m : ℝ) * A ∧ 8 * w * E ≤ A ∧
+      (m : ℝ) ^ 2 * collisionMass2 q L ≤ 1 / 100 ∧
+      32000000 * E ≤ (m : ℝ) ^ 2 * A ^ 2 := by
+  obtain ⟨hm, hE, hA, w, hw, hcap, hmean, hsmall, hnull, hsignal, _⟩ :=
+    concentrated_actual_parameters_with_geometry q x T β ε hT hβ hx hkkt hbudget hradius hmax hD
+  exact ⟨hm, hE, hA, w, hw, hcap, hmean, hsmall, hnull, hsignal⟩
 
 end IdentityTesting.FiniteAllocationUpper

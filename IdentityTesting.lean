@@ -98,3 +98,7 @@ import IdentityTesting.OracleExactStopping
 import IdentityTesting.HeavyRestrictedSupport
 import IdentityTesting.AllocationBoundaryDerivative
 import IdentityTesting.BinaryRationalNormalization
+import IdentityTesting.EffectiveCountableCertificates
+import IdentityTesting.MeasurePrior
+import IdentityTesting.NormalizedTruncationLowerBound
+import IdentityTesting.HeavySharpErrors
