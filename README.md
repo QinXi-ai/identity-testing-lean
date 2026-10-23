@@ -82,6 +82,8 @@ by Xi Qin (Wuhan University).
   Rational division, subtraction and comparison have canonical-output bounds of
   `50000`, `2700000` and `5500000` times `(L(p)+L(q)+1)^3`, respectively.
   Division includes the totalized zero-denominator case.
+  A binary length machine reads the input cells, increments a binary counter,
+  and returns the canonical binary length within `100(L+1)^2` primitive actions.
 - **Register and workspace operations.** Actual symbol machines read and write
   delimited registers, split and join rational records, and clear arithmetic
   scratch stacks while preserving an output frame. Rational multiplication and
@@ -110,6 +112,8 @@ by Xi Qin (Wuhan University).
   Initialization programs read the original rational inputs to compute the seven
   oracle parameters and precision ratios, with proved instruction, register and
   code-size bounds. The expression compiler preserves the input registers.
+  Every actual initialization operand and intermediate register tape also has
+  an explicit polynomial encoding bound in the original input length.
   These are rational-instruction bounds; initialization, address generation and
   the full bit-machine simulation remain to be assembled.
 - **Gaussian calculations.** Exact linear and diagonal quadratic exponential
