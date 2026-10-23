@@ -75,11 +75,18 @@ by Xi Qin (Wuhan University).
   with proved termination, canonical outputs and polynomial primitive-action bounds.
   Signed addition, multiplication, comparison and negation include zero-sign handling.
   Signed addition uses at most `400(bits(|x|)+bits(|y|)+1)` primitive actions.
+  Signed subtraction is linear, and an actual rational multiplication machine
+  returns the reduced fraction within `20000(L(p)+L(q)+1)^3` primitive actions.
 - **Actual rational instruction traces.** A finite-register program implements
-  coordinate bisection and scalar budget/objective accumulation. Its traces
-  record arithmetic and comparisons, with proved call counts and operand lengths.
+  coordinate bisection and the complete finite-vector budget/objective evaluator.
+  Its output equals the original interval evaluator, with at most `k(21n+45)`
+  arithmetic/comparison calls and `17+k` registers. Every actual operand,
+  including partial sums and scratch values, has a proved polynomial length bound.
   These are rational-instruction bounds; the full bit-machine simulation remains
   to be assembled.
+- **Gaussian calculations.** Exact linear and diagonal quadratic exponential
+  integrals, orthogonal invariance of the standard Gaussian vector, and the
+  finite-sign/Gaussian interchange used in the signed-matrix argument.
 
 The statistical proof constructs tests for the point-mass, allocation, moment,
 and heavy-atom interior/exterior regimes, then transfers finite results to
