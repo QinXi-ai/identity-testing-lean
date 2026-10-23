@@ -91,6 +91,9 @@ by Xi Qin (Wuhan University).
   Register copying composes those actual machines, including coincident source
   and destination addresses. Addition and division include separate proved
   bounds for clearing every scratch cell while preserving the output.
+  A multiplication instruction performs both loads, arithmetic, writeback and
+  cleanup in one machine; all arithmetic and IO scratch stacks finish empty.
+  Its source and destination addresses are supplied as unary tapes.
 - **Actual rational instruction traces.** A finite-register program implements
   coordinate bisection and the complete finite-vector budget/objective evaluator.
   Its output equals the original interval evaluator, with at most `k(21n+45)`
@@ -104,6 +107,9 @@ by Xi Qin (Wuhan University).
   For the complete allocation search, every actual operand and every intermediate
   register tape has a polynomial bound directly in the original input length,
   including all stopping branches and exhaustion of the iteration budget.
+  Initialization programs read the original rational inputs to compute the seven
+  oracle parameters and precision ratios, with proved instruction, register and
+  code-size bounds. The expression compiler preserves the input registers.
   These are rational-instruction bounds; initialization, address generation and
   the full bit-machine simulation remain to be assembled.
 - **Gaussian calculations.** Exact linear and diagonal quadratic exponential
