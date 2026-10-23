@@ -101,14 +101,21 @@ by Xi Qin (Wuhan University).
   input length, and its code size and register count have explicit bounds.
   A general trace theorem bounds every intermediate register and the entire
   register tape from the initial lengths and actual operand lengths.
+  For the complete allocation search, every actual operand and every intermediate
+  register tape has a polynomial bound directly in the original input length,
+  including all stopping branches and exhaustion of the iteration budget.
   These are rational-instruction bounds; initialization, address generation and
   the full bit-machine simulation remain to be assembled.
 - **Gaussian calculations.** Exact linear and diagonal quadratic exponential
   integrals, orthogonal invariance of the standard Gaussian vector, and the
   finite-sign/Gaussian interchange used in the signed-matrix argument. Quadratic
-  integration and integrability are proved for a supplied orthonormal eigenbasis.
+  integration and integrability hold in an orthonormal eigenbasis. For a
+  self-adjoint operator of norm below one, the spectral theorem constructs that
+  basis and gives the exact product formula without a supplied eigenbasis.
   The actual Gram quadratic form and trace agree with the squared Euclidean and
   Frobenius norms, and the Euclidean operator norm is bounded by the Frobenius norm.
+  The squared-matrix-norm exponential is integrable under the corresponding
+  Frobenius bound. The matrix determinant form is still being completed.
 
 The statistical proof constructs tests for the point-mass, allocation, moment,
 and heavy-atom interior/exterior regimes, then transfers finite results to

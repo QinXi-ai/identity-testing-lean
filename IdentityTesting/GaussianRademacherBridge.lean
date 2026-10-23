@@ -61,4 +61,20 @@ theorem gaussian_signed_matrix_pointwise {d : ℕ} (M : Fin d → Fin d → ℝ)
   simp_rw [he]
   exact uniformSigns_linear_mgf_le _ t
 
+theorem gaussian_signed_matrix_sum_integrable {d : ℕ} (M : Fin d → Fin d → ℝ) (t : ℝ) :
+    Integrable (fun z : Fin d → ℝ => ∑ σ : Fin d → Bool, (uniformSigns d).mass σ *
+      Real.exp (t * ∑ i, z i * signedSum (M i) σ))
+      (Measure.pi (fun _ : Fin d => gaussianReal 0 1)) := by
+  apply integrable_finset_sum
+  intro σ _
+  have h := (integrable_gaussian_vector_linear (fun i => t * signedSum (M i) σ)).const_mul
+    ((uniformSigns d).mass σ)
+  convert h using 1
+  ext z
+  congr 2
+  rw [Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro i _
+  ring
+
 end IdentityTesting.GeneralSignedMatrix
