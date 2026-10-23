@@ -109,3 +109,53 @@ open IdentityTesting.RationalComputation
       (allocationOracleInputLength a 1 (1 / 2), r.2.length,
         (r.2.map rationalEncodingLength).foldl max 0,
         r.1 == allocationOracle a 1 (1 / 2))
+
+#print IdentityTesting.minimumSampleComplexity
+#check IdentityTesting.allocationD_mass_scale
+#print axioms IdentityTesting.allocationD_mass_scale
+#check IdentityTesting.equal_block_budget_isGreatest
+#print axioms IdentityTesting.equal_block_budget_isGreatest
+#check IdentityTesting.allocation_maximizer_equal_block_contribution
+#print axioms IdentityTesting.allocation_maximizer_equal_block_contribution
+#check IdentityTesting.uniform_allocationD
+#print axioms IdentityTesting.uniform_allocationD
+#check IdentityTesting.uniform_allocationRoot
+#print axioms IdentityTesting.uniform_allocationRoot
+#check IdentityTesting.uniform_overlapMoment_eq_one
+#print axioms IdentityTesting.uniform_overlapMoment_eq_one
+#check IdentityTesting.uniform_allocationRoot_near_endpoint
+#print axioms IdentityTesting.uniform_allocationRoot_near_endpoint
+#check IdentityTesting.uniform_allocationRoot_factorization
+#print axioms IdentityTesting.uniform_allocationRoot_factorization
+#check IdentityTesting.uniform_allocationRoot_away_endpoint
+#print axioms IdentityTesting.uniform_allocationRoot_away_endpoint
+#check IdentityTesting.uniform_testing_characterization
+#print axioms IdentityTesting.uniform_testing_characterization
+#check IdentityTesting.uniform_testing_characterization_near_endpoint
+#print axioms IdentityTesting.uniform_testing_characterization_near_endpoint
+#check IdentityTesting.flatTail_allocationD
+#print axioms IdentityTesting.flatTail_allocationD
+#check IdentityTesting.flatTail_boundary_root_equation
+#print axioms IdentityTesting.flatTail_boundary_root_equation
+#check IdentityTesting.quarter_power_deficit_bounds
+#print axioms IdentityTesting.quarter_power_deficit_bounds
+#check IdentityTesting.flat_tail_scalar_root_bounds
+#print axioms IdentityTesting.flat_tail_scalar_root_bounds
+#check IdentityTesting.flatTail_boundary_heavyRoot_bounds
+#print axioms IdentityTesting.flatTail_boundary_heavyRoot_bounds
+#check IdentityTesting.flatTail_exterior_scale_bounds
+#print axioms IdentityTesting.flatTail_exterior_scale_bounds
+#check IdentityTesting.flatTail_testing_characterization_boundary
+#print axioms IdentityTesting.flatTail_testing_characterization_boundary
+#check IdentityTesting.flatTail_testing_characterization_exterior
+#print axioms IdentityTesting.flatTail_testing_characterization_exterior
+#check IdentityTesting.minimumSampleComplexity_isLeast
+#print axioms IdentityTesting.minimumSampleComplexity_isLeast
+#check IdentityTesting.minimumSampleComplexity_at_one
+#print axioms IdentityTesting.minimumSampleComplexity_at_one
+#check IdentityTesting.minimumSampleComplexity_point_reference
+#print axioms IdentityTesting.minimumSampleComplexity_point_reference
+#check IdentityTesting.minimumSampleComplexity_pos
+#print axioms IdentityTesting.minimumSampleComplexity_pos
+#check IdentityTesting.minimumSampleComplexity_characterization
+#print axioms IdentityTesting.minimumSampleComplexity_characterization

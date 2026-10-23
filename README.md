@@ -25,6 +25,11 @@ by Xi Qin (Wuhan University).
   arbitrary ℓ¹ convergence and positive limiting overlap targets; invariance of
   allocation, moment, roots, and characterization scales under countable
   permutations, including tied largest atoms.
+- **Explicit examples.** Exact uniform allocation and root formulas, the
+  near-endpoint scale `max(1, √(k(1−ε)))`, and the flat-tail boundary scale
+  `k^(2/5)/R`, including its exterior minimum transition.
+- **Minimum sample counts.** A natural-number minimum in the original test
+  model, its universal scale comparison, and the exact point-mass formula.
 
 The statistical proof constructs tests for the point-mass, allocation, moment,
 and heavy-atom interior/exterior regimes, then transfers finite results to
@@ -98,6 +103,11 @@ covering all branches and a reordered reference. The audited proofs use only
 | [RationalOracleResourceBounds.lean](IdentityTesting/RationalOracleResourceBounds.lean) | Actual oracle parameters, trace, and output sizes |
 | [OverlapMomentJointContinuity.lean](IdentityTesting/OverlapMomentJointContinuity.lean) | General ℓ¹ and target joint continuity |
 | [CountableRelabeling.lean](IdentityTesting/CountableRelabeling.lean) | Countable permutation invariance of the actual functionals |
+| [AllocationScaling.lean](IdentityTesting/AllocationScaling.lean) | Exact mass scaling of the countable allocation functional |
+| [EqualBlockAllocation.lean](IdentityTesting/EqualBlockAllocation.lean) | Exact equal-mass block optimization |
+| [UniformExamples.lean](IdentityTesting/UniformExamples.lean) | Uniform root formulas and statistical scales |
+| [FlatTailExamples.lean](IdentityTesting/FlatTailExamples.lean) | Flat-tail roots, quantitative bounds, and statistical scales |
+| [MinimumSampleComplexity.lean](IdentityTesting/MinimumSampleComplexity.lean) | Literal minimum-sample characterization |
 | [Target.lean](IdentityTesting/Target.lean) | Allocation, moment, root, and scale definitions |
 | [CountableModel.lean](IdentityTesting/CountableModel.lean) | Statistical model |
 | [Verification.lean](Verification.lean) | Type, axiom, and execution audit |

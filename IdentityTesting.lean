@@ -78,3 +78,7 @@ import IdentityTesting.RationalOracleEvaluationEncoding
 import IdentityTesting.RationalOracleResourceBounds
 import IdentityTesting.OverlapMomentJointContinuity
 import IdentityTesting.CountableRelabeling
+import IdentityTesting.AllocationScaling
+import IdentityTesting.UniformExamples
+import IdentityTesting.FlatTailExamples
+import IdentityTesting.MinimumSampleComplexity
