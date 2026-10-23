@@ -29,10 +29,15 @@ by Xi Qin (Wuhan University).
   near-endpoint scale `max(1, √(k(1−ε)))`, and the flat-tail boundary scale
   `k^(2/5)/R`, including its exterior minimum transition.
 - **Minimum sample counts.** A natural-number minimum in the original test
-  model, its universal scale comparison, and the exact point-mass formula.
+  model, its universal scale comparison, and the exact point-mass formula;
+  the finite `h ≤ 4/5` corollary and heavy-atom bounds including `R = 1/4`.
 - **General roots and signed mixtures.** Existence and continuity of roots for
   arbitrary nonnegative summable mass vectors; the general signed-likelihood
   matrix total-variation bound and its explicit heavy-atom Frobenius constant.
+- **Allocation analysis.** Strict concavity, explicit derivatives, the sharp
+  finite-dimensional Hölder envelope, the original time-decrease window, and
+  the real oracle family's continuity, monotonicity, range and elasticities.
+  Feasible heavy-tail compression has the original `1024` and strict `16/T` bounds.
 - **Binary arithmetic machines.** Fixed finite-control stack machines for
   addition and multiplication, with proved termination, correct binary outputs,
   and explicit polynomial bounds on primitive bit actions.
@@ -132,6 +137,12 @@ covering all branches and a reordered reference. The audited proofs use only
 | [BinaryAdderMachine.lean](IdentityTesting/BinaryAdderMachine.lean) | Fixed-stack addition machine |
 | [BinaryMultiplierBound.lean](IdentityTesting/BinaryMultiplierBound.lean) | Fixed-stack multiplication machine and cost bound |
 | [AllocationExplicitDerivatives.lean](IdentityTesting/AllocationExplicitDerivatives.lean) | Explicit first and second derivatives, with strict concavity on the simplex |
+| [AllocationExactTimeDecrease.lean](IdentityTesting/AllocationExactTimeDecrease.lean) | Exact time-decrease fraction and the constant-64 root window |
+| [OracleBudgetFamily.lean](IdentityTesting/OracleBudgetFamily.lean) | Full real parameter family, elasticities and unique optimizer |
+| [OracleManuscriptBounds.lean](IdentityTesting/OracleManuscriptBounds.lean) | Min/max bracket, pole separation and coordinate-error constants |
+| [HeavyCompressionPrior.lean](IdentityTesting/HeavyCompressionPrior.lean) | Actual compression prior with the original feasible-budget constants |
+| [FiniteCapCorollary.lean](IdentityTesting/FiniteCapCorollary.lean) | Finite cap-4/5 corollary and boundary comparison |
+| [HeavyClosedCharacterization.lean](IdentityTesting/HeavyClosedCharacterization.lean) | Closed-domain heavy-atom minimum sample bounds |
 | [Target.lean](IdentityTesting/Target.lean) | Allocation, moment, root, and scale definitions |
 | [CountableModel.lean](IdentityTesting/CountableModel.lean) | Statistical model |
 | [Verification.lean](Verification.lean) | Type, axiom, and execution audit |
