@@ -40,3 +40,39 @@ open IdentityTesting.RationalComputation in
 #eval rationalComplexityInterval (k := 1) ![(7 : ℚ) / 8, 1 / 8] (1 / 2)
 open IdentityTesting.RationalComputation in
 #eval rationalComplexityInterval (k := 1) ![(1 : ℚ) / 8, 7 / 8] (1 / 8)
+
+open IdentityTesting.RationalComputation
+
+#print rationalEncodingLength
+#check rational_div_encoding_le
+#check rational_sum_encoding
+#check oracleDyadicPrecision_encoding_le
+#check coordinateInterval_dyadic_grid
+#check coordinateInterval_step
+#check coordinateInterval_encoding_le
+#check coordinateQuery_polynomial_encoding_le
+#check coordinateInterval_precision_encoding_le
+#check oracleCoordinateInterval_encoding_le
+#check rationalAllocationCost_encoding_le
+#check oracleObjectiveInterval_encoding_le
+#check oracleBudgetInterval_encoding_le
+
+#print axioms rational_fraction_reduction_bounds
+#print axioms rational_div_encoding_le
+#print axioms rational_sum_encoding
+#print axioms oracleDyadicPrecision_encoding_le
+#print axioms coordinateInterval_dyadic_grid
+#print axioms coordinateInterval_step
+#print axioms coordinateInterval_encoding_le
+#print axioms coordinateQuery_polynomial_encoding_le
+#print axioms coordinateInterval_precision_encoding_le
+#print axioms oracleCoordinateInterval_encoding_le
+#print axioms rationalAllocationCost_encoding_le
+#print axioms oracleObjectiveInterval_encoding_le
+#print axioms oracleBudgetInterval_encoding_le
+
+#eval let I := coordinateInterval (1 / 2) 1 32
+      (rationalEncodingLength I.1, rationalEncodingLength I.2,
+        rationalEncodingLength (coordinateQuery (1 / 2) 1 32))
+#eval let I := oracleBudgetInterval ![(1 : ℚ) / 2, 1 / 2] 1 1 (1 / 128) 16
+      (rationalEncodingLength I.1, rationalEncodingLength I.2)

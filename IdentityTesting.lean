@@ -74,3 +74,4 @@ import IdentityTesting.RationalComplexityScale
 import IdentityTesting.ComplexityScaleRounding
 import IdentityTesting.AllocationHolderBound
 import IdentityTesting.CountableCharacterizationRealScale
+import IdentityTesting.RationalOracleEvaluationEncoding

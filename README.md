@@ -17,6 +17,9 @@ by Xi Qin (Wuhan University).
   executable algorithm returns rational endpoints satisfying
   `0 ≤ L ≤ complexityScale(q, ε) ≤ U ≤ 2L`. The endpoints are positive when
   `ε < 1` and both zero when `ε = 1`.
+- **Rational representation sizes.** Explicit bounds for reduced numerators and
+  denominators, the coordinate-bisection endpoints and actual queries, and the
+  allocation oracle's coordinate, budget, and objective intervals.
 
 The statistical proof constructs tests for the point-mass, allocation, moment,
 and heavy-atom interior/exterior regimes, then transfers finite results to
@@ -27,6 +30,27 @@ oracles, certified root searches, maximum-atom selection, and moment intervals.
 definitions and proved termination do not establish a polynomial-time bound.
 This repository formalizes the core results, not every auxiliary claim or example
 in the manuscript.
+
+### Representation-size bounds
+
+Write `L(q) = 1 + bits(|q.num|) + bits(q.den)` and
+`V(a) = k + ∑ᵢ L(aᵢ)`. The checked results include:
+
+- After `n` coordinate-bisection steps, each endpoint has length at most `2n+3`.
+- The actual query after `i` completed steps has length at most `2i+5`; its sign-polynomial
+  value has length at most `2(L(a)+L(β))+76i+255`.
+- For `B = 2n+2L(ρ)+7`, each pole-safe coordinate endpoint has length at most `B`.
+  Each objective-interval endpoint has length at most `2V(a)+2kB+3`, and each
+  budget-interval endpoint at most `4V(a)+2k(2L(t)+12B+22)+3`.
+- The computed precision `n = oracleDyadicPrecision C δ` satisfies
+  `n ≤ L(C)+L(δ)+1` whenever `δ > 0`.
+
+These statements refer to the executable Lean definitions. The coordinate
+routine bisects `[0,1]` and clips the upper endpoint to `1−ρ`; its correctness
+is proved for this implementation. Bounds for the outer parameter search and
+constructed parameters in terms of the original input length, and the cost of
+integer arithmetic and rational normalization, remain to be proved before a
+full polynomial bit-operation complexity theorem can be claimed.
 
 ## Build and verify
 
@@ -58,6 +82,9 @@ covering all branches and a reordered reference. The audited proofs use only
 | [CountableCharacterization.lean](IdentityTesting/CountableCharacterization.lean) | Full countable statistical theorem |
 | [CountableCharacterizationRealScale.lean](IdentityTesting/CountableCharacterizationRealScale.lean) | Bounds directly in the real characterization scale |
 | [RationalComplexityScale.lean](IdentityTesting/RationalComplexityScale.lean) | Executable interval algorithm and its specification |
+| [RationalEncodingBounds.lean](IdentityTesting/RationalEncodingBounds.lean) | Reduced rational arithmetic and precision encoding bounds |
+| [RationalBisectionEncoding.lean](IdentityTesting/RationalBisectionEncoding.lean) | Dyadic grid invariant and actual query encoding bounds |
+| [RationalOracleEvaluationEncoding.lean](IdentityTesting/RationalOracleEvaluationEncoding.lean) | Pole-safe coordinate, budget, and objective encoding bounds |
 | [Target.lean](IdentityTesting/Target.lean) | Allocation, moment, root, and scale definitions |
 | [CountableModel.lean](IdentityTesting/CountableModel.lean) | Statistical model |
 | [Verification.lean](Verification.lean) | Type, axiom, and execution audit |
