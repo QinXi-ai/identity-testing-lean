@@ -137,15 +137,18 @@ by Xi Qin (Wuhan University).
   history. Its bound is `6000*(T + lhs.slots + rhs.slots + 1) + 100000000*S^3`.
   Rearming preserves every physical stack and supports the next instruction on
   the same pool. An outer controller now consumes the actual program-node tags
-  for arbitrary nested skip/instruction/sequence programs. Its two-symbol
-  continuation stack schedules both sequence children and consumes the closing
-  tag. The top-level theorem starts with an empty pool, halts with an empty
-  continuation stack, returns exactly the source program's register result,
-  clears the workspace, and preserves the unread suffix and full consumed-code
-  history. Rearming and continuation operations are charged. Its compositional
-  bound uses the actual intermediate register states; branches, repetitions and
-  a uniform input-length bound for the complete algorithm remain open. These
-  costs count the defined transition traces; a general BitOp
+  for arbitrary nested skip/instruction/sequence/conditional programs. Branches
+  load and compare both operands without writing a register, read the actual
+  comparison result, clear the comparison workspace, execute the chosen subtree,
+  and scan the unchosen subtree according to its encoded syntax. Payload bits
+  are distinguished from node tags. Finite-alphabet continuation and parser-task
+  stacks support nested branches. The top-level theorem starts with an empty
+  pool, halts with both stacks empty, returns exactly the source program's
+  register result, clears the workspace, and preserves the unread suffix and
+  full consumed-code history. Rearming, continuation operations and unchosen-code
+  scans are charged. The compositional bound uses actual intermediate register
+  states; repetitions and a uniform input-length bound for the complete algorithm
+  remain open. These costs count the defined transition traces; a general BitOp
   interpreter/simulation theorem is not yet supplied.
 - **Actual rational instruction traces.** A finite-register program implements
   coordinate bisection and the complete finite-vector budget/objective evaluator.
@@ -165,7 +168,14 @@ by Xi Qin (Wuhan University).
   code-size bounds. The expression compiler preserves the input registers.
   Every actual initialization operand and intermediate register tape also has
   an explicit polynomial encoding bound in the original input length.
-  A program depending only on the dimension now starts from the original
+  Every compiled arithmetic expression, including nested minimum expressions,
+  now has a binary execution theorem. Applied to the actual seven oracle
+  preparation fields, it returns each original parameter value in register
+  `k+3` and preserves the input prefix. These entries start from the encoded
+  field program and the specified zero scratch. The complete initializer still
+  needs its ceiling-size control nodes and combined execution; code generation
+  and initial scratch allocation are not charged by the field theorem.
+  A high-level register program depending only on the dimension starts from the original
   `[t, sigma] ++ a` and zero scratch, computes its initialization fields and
   runtime precision/fuel, and returns exactly `allocationOracle`. Its dynamic
   arithmetic trace agrees with the proved search trace. The code tape has an
@@ -308,6 +318,8 @@ covering all branches and a reordered reference. The audited proofs use only
 | [BinaryInterpreterDispatchRuns.lean](IdentityTesting/BinaryInterpreterDispatchRuns.lean) | Runtime instruction decoding and fixed-pool execution with exact source instruction semantics |
 | [BinaryInterpreterCounterInputPrepared.lean](IdentityTesting/BinaryInterpreterCounterInputPrepared.lean) | Actual initialized precision/fuel register loads into binary counters |
 | [BinaryInterpreterProgramEntry.lean](IdentityTesting/BinaryInterpreterProgramEntry.lean) | Actual encoded skip/instruction/sequence execution through top-level halt |
+| [BinaryInterpreterBranchEntry.lean](IdentityTesting/BinaryInterpreterBranchEntry.lean) | Actual conditional programs, complete expression compiler, and seven oracle preparation fields |
+| [BinaryCodeSkipRuns.lean](IdentityTesting/BinaryCodeSkipRuns.lean) | Syntax-directed cellwise scan of complete encoded program/control subtrees |
 | [BinaryCounterStackRuns.lean](IdentityTesting/BinaryCounterStackRuns.lean) | Cellwise nested counter-frame save/restore with exact costs |
 | [OracleExactStopping.lean](IdentityTesting/OracleExactStopping.lean) | Aggregate elasticities, parameter ratios and exact stopping windows |
 | [HeavyRestrictedSupport.lean](IdentityTesting/HeavyRestrictedSupport.lean) | Lower bounds for alternatives on the positive support |

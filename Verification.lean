@@ -745,3 +745,34 @@ open IdentityTesting.GeneralSignedMatrix
 #print axioms IdentityTesting.BinaryCounterStack.save_restore
 #print axioms IdentityTesting.BinaryCounterStack.restore_from_empty
 #print axioms IdentityTesting.BinaryCounterStack.restore_inner_preserves_outer
+
+-- Actual conditional execution and oracle preparation fields
+#print IdentityTesting.BinaryInterpreterBranchProgram.LoopFree
+#print IdentityTesting.BinaryInterpreterBranchProgram.cost
+#print IdentityTesting.BinaryInterpreterBranchProgram.initial
+#check @IdentityTesting.BinaryInterpreterBranchProgram.compare_run
+#check @IdentityTesting.BinaryInterpreterBranchProgram.skip_program
+#check @IdentityTesting.BinaryInterpreterBranchProgram.run_core
+#check @IdentityTesting.BinaryInterpreterBranchProgram.binary_loopFree_program_from_empty
+#check @IdentityTesting.BinaryInterpreterBranchProgram.binary_expression
+#check @IdentityTesting.BinaryInterpreterBranchProgram.binary_oracle_field
+#check @IdentityTesting.BinaryInterpreterBranchCompare.binary_branch_compare
+#check @IdentityTesting.BinaryCodeSkip.binary_skip_program
+#check @IdentityTesting.BinaryCodeSkip.binary_skip_control
+
+#print axioms IdentityTesting.BinaryInterpreterBranchProgram.compile_loopFree
+#print axioms IdentityTesting.BinaryInterpreterBranchProgram.compareView_set
+#print axioms IdentityTesting.BinaryInterpreterBranchProgram.setCompare_view
+#print axioms IdentityTesting.BinaryInterpreterBranchProgram.setSkip_view
+#print axioms IdentityTesting.BinaryInterpreterBranchProgram.forward_compare
+#print axioms IdentityTesting.BinaryInterpreterBranchProgram.forward_skip
+#print axioms IdentityTesting.BinaryInterpreterBranchProgram.compare_run
+#print axioms IdentityTesting.BinaryInterpreterBranchProgram.skip_program
+#print axioms IdentityTesting.BinaryInterpreterBranchProgram.run_core
+#print axioms IdentityTesting.BinaryInterpreterBranchProgram.binary_loopFree_program
+#print axioms IdentityTesting.BinaryInterpreterBranchProgram.binary_loopFree_program_from_empty
+#print axioms IdentityTesting.BinaryInterpreterBranchProgram.binary_expression
+#print axioms IdentityTesting.BinaryInterpreterBranchProgram.binary_oracle_field
+#print axioms IdentityTesting.BinaryInterpreterBranchCompare.binary_branch_compare
+#print axioms IdentityTesting.BinaryCodeSkip.binary_skip_program
+#print axioms IdentityTesting.BinaryCodeSkip.binary_skip_control

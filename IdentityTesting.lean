@@ -172,3 +172,4 @@ import IdentityTesting.BinaryInterpreterDispatchReuse
 import IdentityTesting.BinaryInterpreterCounterInputPrepared
 import IdentityTesting.BinaryInterpreterProgramEntry
 import IdentityTesting.BinaryCounterStackRuns
+import IdentityTesting.BinaryInterpreterBranchEntry
