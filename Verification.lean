@@ -698,3 +698,13 @@ open IdentityTesting.GeneralSignedMatrix
 #print axioms IdentityTesting.BinaryInterpreterCeilSize.binary_register_ceilSize_with_cleanup
 #check @IdentityTesting.BinaryInterpreterCeilSize.rearm_clean
 #print axioms IdentityTesting.BinaryInterpreterCeilSize.rearm_clean
+
+#print IdentityTesting.BinaryInterpreterOperandExecute.Finished
+#check @IdentityTesting.BinaryInterpreterOperand.operand_load
+#print axioms IdentityTesting.BinaryInterpreterOperand.operand_load
+#check @IdentityTesting.BinaryInterpreterOperandPair.pair_load
+#print axioms IdentityTesting.BinaryInterpreterOperandPair.pair_load
+#check @IdentityTesting.BinaryInterpreterOperandExecute.execute_operands
+#print axioms IdentityTesting.BinaryInterpreterOperandExecute.execute_operands
+#check @IdentityTesting.BinaryInterpreterOperandExecute.binary_operand_execution
+#print axioms IdentityTesting.BinaryInterpreterOperandExecute.binary_operand_execution

@@ -121,6 +121,17 @@ by Xi Qin (Wuhan University).
   clears all 31 core stacks and all IO stacks, and can be rearmed for reuse.
   This implementation counts a second source load into an auxiliary input word;
   its 31 stacks are separate from the six arithmetic groups above.
+  A shared operand-code loader now consumes the reg/literal discriminators and
+  both payloads, with all four operand combinations supported. It feeds the same
+  arithmetic core used by operate/writeback/physical cleanup for all six operations.
+  The result tape equals the corresponding register update, including destination
+  aliases; the unread code suffix and complete reversed operand history are
+  preserved, and all core, I/O and loader temporary stacks finish empty.
+  Its bound is `5000*(T + lhs.slots + rhs.slots) + 100000000*S^3`, where
+  `S = L(lhs.read registers) + L(rhs.read registers) + 1`.
+  The operation and unary destination are still supplied at entry. Their decoding
+  and whole-program dispatch remain open. These costs count the defined transition
+  traces; a general BitOp interpreter/simulation theorem is not yet supplied.
 - **Actual rational instruction traces.** A finite-register program implements
   coordinate bisection and the complete finite-vector budget/objective evaluator.
   Its output equals the original interval evaluator, with at most `k(21n+45)`
@@ -265,6 +276,7 @@ covering all branches and a reordered reference. The audited proofs use only
 | [BinaryAdderMachine.lean](IdentityTesting/BinaryAdderMachine.lean) | Fixed-stack addition machine |
 | [BinaryMultiplierBound.lean](IdentityTesting/BinaryMultiplierBound.lean) | Fixed-stack multiplication machine and cost bound |
 | [BinaryRationalNormalization.lean](IdentityTesting/BinaryRationalNormalization.lean) | Actual fraction reduction, canonical outputs and cubic bit cost |
+| [BinaryInterpreterOperandExecuteInstances.lean](IdentityTesting/BinaryInterpreterOperandExecuteInstances.lean) | Encoded reg/literal operands through all six operations, writeback and physical cleanup |
 | [OracleExactStopping.lean](IdentityTesting/OracleExactStopping.lean) | Aggregate elasticities, parameter ratios and exact stopping windows |
 | [HeavyRestrictedSupport.lean](IdentityTesting/HeavyRestrictedSupport.lean) | Lower bounds for alternatives on the positive support |
 | [EffectiveCountableCertificates.lean](IdentityTesting/EffectiveCountableCertificates.lean) | Executable countable intervals and endpoint convergence |
