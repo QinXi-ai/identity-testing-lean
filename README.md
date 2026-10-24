@@ -84,6 +84,10 @@ by Xi Qin (Wuhan University).
   Division includes the totalized zero-denominator case.
   A binary length machine reads the input cells, increments a binary counter,
   and returns the canonical binary length within `100(L+1)^2` primitive actions.
+  A rational ceiling-size machine performs division, rounding, normalization and
+  bit counting to return `size(ceil(q))` as a canonical rational record, within
+  `8000(L(q)+1)^2` primitive actions. A separate scratch-cleanup bound gives
+  `40000(L(q)+1)^2` in total.
 - **Register and workspace operations.** Actual symbol machines read and write
   delimited registers, split and join rational records, and clear arithmetic
   scratch stacks while preserving an output frame. Rational multiplication and
