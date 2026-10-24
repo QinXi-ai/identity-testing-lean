@@ -596,3 +596,50 @@ open IdentityTesting.RationalComputation
 #print axioms IdentityTesting.BinaryWorkspaceAdapters.binary_rational_ceilSize_with_cleanup
 #check @IdentityTesting.BinaryWorkspaceAdapters.binary_rational_comparison_with_cleanup
 #print axioms IdentityTesting.BinaryWorkspaceAdapters.binary_rational_comparison_with_cleanup
+
+#print RationalControlProgram
+#print RationalControlEvent
+#print oracleInitializerInput
+#print preparedAllocationProgram
+#check @preparedAllocationProgram_result
+#print axioms preparedAllocationProgram_result
+#check @oracleInitializerProgram_block
+#print axioms oracleInitializerProgram_block
+#check @oracleInitializerProgram_preserves_input
+#print axioms oracleInitializerProgram_preserves_input
+#check @oracleDynamicSearchProgram_result
+#print axioms oracleDynamicSearchProgram_result
+#check @allocationDynamicSearchProgram_calls
+#print axioms allocationDynamicSearchProgram_calls
+#check @RationalProgram.dynamicRepeats_result
+#print axioms RationalProgram.dynamicRepeats_result
+#check @RationalProgram.dynamicRepeats_calls
+#print axioms RationalProgram.dynamicRepeats_calls
+#check @RationalControlProgram.shift_run
+#print axioms RationalControlProgram.shift_run
+#check @rationalPrepareExpressions_correct
+#print axioms rationalPrepareExpressions_correct
+#check @RationalProgramCode.program_length_le
+#print axioms RationalProgramCode.program_length_le
+#check @RationalProgramCode.control_length_le
+#print axioms RationalProgramCode.control_length_le
+#check @oracleDynamicSearchProgram_tape_length
+#print axioms oracleDynamicSearchProgram_tape_length
+#check @RationalProgramCode.control_no_marker
+#print axioms RationalProgramCode.control_no_marker
+#check @IdentityTesting.BinaryRationalArithmeticNatCounter.binary_nat_counter_test
+#print axioms IdentityTesting.BinaryRationalArithmeticNatCounter.binary_nat_counter_test
+#check @IdentityTesting.BinaryRationalArithmeticNatCounter.binary_nat_counter_predecessor
+#print axioms IdentityTesting.BinaryRationalArithmeticNatCounter.binary_nat_counter_predecessor
+#check @IdentityTesting.BinaryCodeWordLoader.binary_code_word_load
+#print axioms IdentityTesting.BinaryCodeWordLoader.binary_code_word_load
+#check @IdentityTesting.BinaryCodeLiteralLoader.binary_literal_load
+#print axioms IdentityTesting.BinaryCodeLiteralLoader.binary_literal_load
+#check @IdentityTesting.BinaryCodeRewind.binary_code_rewind
+#print axioms IdentityTesting.BinaryCodeRewind.binary_code_rewind
+#check @IdentityTesting.BinaryCodeMaterialization.materialize_rational
+#print axioms IdentityTesting.BinaryCodeMaterialization.materialize_rational
+#check @IdentityTesting.BinaryCodeMaterialization.materialize_address
+#print axioms IdentityTesting.BinaryCodeMaterialization.materialize_address
+#check @IdentityTesting.BinaryCodeMaterialization.materialize_tag
+#print axioms IdentityTesting.BinaryCodeMaterialization.materialize_tag

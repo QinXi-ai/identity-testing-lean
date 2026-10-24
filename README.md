@@ -107,7 +107,10 @@ by Xi Qin (Wuhan University).
   the result tape is preserved and every arithmetic and IO scratch stack is empty.
   The total bound is `3000*T + 100000000*S^3`, where `T` is the register-tape
   encoding size and `S` is the sum of operand lengths plus one. Whole-program
-  dispatch and code-field materialization remain to be assembled.
+  dispatch remains to be assembled. Separate field loaders read unary addresses,
+  rational literal bodies and tags from an existing code tape, preserving a
+  history that a symbol-by-symbol rewind routine restores. Their costs include
+  the field movements; initial code-tape generation is not yet implemented.
 - **Actual rational instruction traces.** A finite-register program implements
   coordinate bisection and the complete finite-vector budget/objective evaluator.
   Its output equals the original interval evaluator, with at most `k(21n+45)`
@@ -126,8 +129,14 @@ by Xi Qin (Wuhan University).
   code-size bounds. The expression compiler preserves the input registers.
   Every actual initialization operand and intermediate register tape also has
   an explicit polynomial encoding bound in the original input length.
-  These are rational-instruction bounds; initialization, address generation and
-  the full bit-machine simulation remain to be assembled.
+  A program depending only on the dimension now starts from the original
+  `[t, sigma] ++ a` and zero scratch, computes its initialization fields and
+  runtime precision/fuel, and returns exactly `allocationOracle`. Its dynamic
+  arithmetic trace agrees with the proved search trace. The code tape has an
+  explicit length bound. Separate binary-counter routines preserve the counter
+  when testing zero and compute predecessor in at most `12*(bits(n)+1)` primitive
+  actions. These components still need whole-program bit-machine assembly,
+  including code generation, scratch allocation and nested counter storage.
 - **Gaussian calculations.** Exact linear and diagonal quadratic exponential
   integrals, orthogonal invariance of the standard Gaussian vector, and the
   finite-sign/Gaussian interchange used in the signed-matrix argument. Quadratic
