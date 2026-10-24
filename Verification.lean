@@ -720,3 +720,28 @@ open IdentityTesting.GeneralSignedMatrix
 #print axioms IdentityTesting.BinaryInterpreterCounterInput.load_prepared_precision
 #check @IdentityTesting.BinaryInterpreterCounterInput.load_prepared_fuel
 #print axioms IdentityTesting.BinaryInterpreterCounterInput.load_prepared_fuel
+
+-- Straight program execution and nested counter frames
+#print IdentityTesting.BinaryInterpreterProgram.Straight
+#print IdentityTesting.BinaryInterpreterProgram.cost
+#print IdentityTesting.BinaryInterpreterProgram.Result
+#check @IdentityTesting.BinaryInterpreterProgram.run_core
+#check @IdentityTesting.BinaryInterpreterProgram.binary_straight_program
+#check @IdentityTesting.BinaryInterpreterProgram.binary_straight_program_from_empty
+#check @IdentityTesting.BinaryCounterStack.save_restore
+#check @IdentityTesting.BinaryCounterStack.restore_from_empty
+#check @IdentityTesting.BinaryCounterStack.restore_inner_preserves_outer
+
+#print axioms IdentityTesting.BinaryInterpreterProgram.node_tag_run
+#print axioms IdentityTesting.BinaryInterpreterProgram.node_tag_cost
+#print axioms IdentityTesting.BinaryInterpreterProgram.close_tag_run
+#print axioms IdentityTesting.BinaryInterpreterProgram.close_tag_cost
+#print axioms IdentityTesting.BinaryInterpreterProgram.forward_instruction
+#print axioms IdentityTesting.BinaryInterpreterProgram.run_core
+#print axioms IdentityTesting.BinaryInterpreterProgram.binary_straight_program
+#print axioms IdentityTesting.BinaryInterpreterProgram.binary_straight_program_from_empty
+#print axioms IdentityTesting.BinaryCounterStack.save_run
+#print axioms IdentityTesting.BinaryCounterStack.restore_run
+#print axioms IdentityTesting.BinaryCounterStack.save_restore
+#print axioms IdentityTesting.BinaryCounterStack.restore_from_empty
+#print axioms IdentityTesting.BinaryCounterStack.restore_inner_preserves_outer

@@ -136,10 +136,17 @@ by Xi Qin (Wuhan University).
   register update, with an empty workspace and the full consumed instruction in
   history. Its bound is `6000*(T + lhs.slots + rhs.slots + 1) + 100000000*S^3`.
   Rearming preserves every physical stack and supports the next instruction on
-  the same pool. This covers `RationalProgramCode.instruction`; outer program-node
-  tags and whole-program control remain to be connected. These costs count the
-  defined transition traces; a general BitOp interpreter/simulation theorem is
-  not yet supplied.
+  the same pool. An outer controller now consumes the actual program-node tags
+  for arbitrary nested skip/instruction/sequence programs. Its two-symbol
+  continuation stack schedules both sequence children and consumes the closing
+  tag. The top-level theorem starts with an empty pool, halts with an empty
+  continuation stack, returns exactly the source program's register result,
+  clears the workspace, and preserves the unread suffix and full consumed-code
+  history. Rearming and continuation operations are charged. Its compositional
+  bound uses the actual intermediate register states; branches, repetitions and
+  a uniform input-length bound for the complete algorithm remain open. These
+  costs count the defined transition traces; a general BitOp
+  interpreter/simulation theorem is not yet supplied.
 - **Actual rational instruction traces.** A finite-register program implements
   coordinate bisection and the complete finite-vector budget/objective evaluator.
   Its output equals the original interval evaluator, with at most `k(21n+45)`
@@ -165,7 +172,7 @@ by Xi Qin (Wuhan University).
   explicit length bound. Separate binary-counter routines preserve the counter
   when testing zero and compute predecessor in at most `12*(bits(n)+1)` primitive
   actions. These components still need whole-program bit-machine assembly,
-  including code generation, scratch allocation and nested counter storage.
+  including code generation, scratch allocation and nested counter control.
   A register-to-counter component now reads natural-valued rational registers,
   uses the reader's numerator stack as the counter, and physically clears the
   denominator. Its cost is at most `45*T + 30*L(n) + 180`; zero testing and
@@ -174,6 +181,11 @@ by Xi Qin (Wuhan University).
   counter loads need no supplied naturalness certificate. The input tape here
   encodes the source initializer's output; binary execution of that initializer,
   arbitrary rational floor conversion and nested loop control remain separate.
+  A separate counter-frame machine now saves and restores arbitrary binary
+  words one cell at a time, including empty words, while preserving outer saved
+  frames. The exact costs are `6*length+5` for saving and `6*length+4` for
+  restoring. Their sum excludes the caller's intervening rearm transition;
+  integration with the shared counter loader and loop driver remains open.
 - **Gaussian calculations.** Exact linear and diagonal quadratic exponential
   integrals, orthogonal invariance of the standard Gaussian vector, and the
   finite-sign/Gaussian interchange used in the signed-matrix argument. Quadratic
@@ -295,6 +307,8 @@ covering all branches and a reordered reference. The audited proofs use only
 | [BinaryInterpreterOperandExecuteInstances.lean](IdentityTesting/BinaryInterpreterOperandExecuteInstances.lean) | Encoded reg/literal operands through all six operations, writeback and physical cleanup |
 | [BinaryInterpreterDispatchRuns.lean](IdentityTesting/BinaryInterpreterDispatchRuns.lean) | Runtime instruction decoding and fixed-pool execution with exact source instruction semantics |
 | [BinaryInterpreterCounterInputPrepared.lean](IdentityTesting/BinaryInterpreterCounterInputPrepared.lean) | Actual initialized precision/fuel register loads into binary counters |
+| [BinaryInterpreterProgramEntry.lean](IdentityTesting/BinaryInterpreterProgramEntry.lean) | Actual encoded skip/instruction/sequence execution through top-level halt |
+| [BinaryCounterStackRuns.lean](IdentityTesting/BinaryCounterStackRuns.lean) | Cellwise nested counter-frame save/restore with exact costs |
 | [OracleExactStopping.lean](IdentityTesting/OracleExactStopping.lean) | Aggregate elasticities, parameter ratios and exact stopping windows |
 | [HeavyRestrictedSupport.lean](IdentityTesting/HeavyRestrictedSupport.lean) | Lower bounds for alternatives on the positive support |
 | [EffectiveCountableCertificates.lean](IdentityTesting/EffectiveCountableCertificates.lean) | Executable countable intervals and endpoint convergence |
