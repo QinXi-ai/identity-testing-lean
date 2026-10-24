@@ -129,9 +129,17 @@ by Xi Qin (Wuhan University).
   preserved, and all core, I/O and loader temporary stacks finish empty.
   Its bound is `5000*(T + lhs.slots + rhs.slots) + 100000000*S^3`, where
   `S = L(lhs.read registers) + L(rhs.read registers) + 1`.
-  The operation and unary destination are still supplied at entry. Their decoding
-  and whole-program dispatch remain open. These costs count the defined transition
-  traces; a general BitOp interpreter/simulation theorem is not yet supplied.
+  A fixed-pool single-instruction dispatcher also reads the operation code and
+  destination from the instruction tape. Its entry takes only the pool, register
+  tape, code and history. It selects the actual operation group at runtime,
+  leaves all other groups unchanged, and returns exactly the source instruction's
+  register update, with an empty workspace and the full consumed instruction in
+  history. Its bound is `6000*(T + lhs.slots + rhs.slots + 1) + 100000000*S^3`.
+  Rearming preserves every physical stack and supports the next instruction on
+  the same pool. This covers `RationalProgramCode.instruction`; outer program-node
+  tags and whole-program control remain to be connected. These costs count the
+  defined transition traces; a general BitOp interpreter/simulation theorem is
+  not yet supplied.
 - **Actual rational instruction traces.** A finite-register program implements
   coordinate bisection and the complete finite-vector budget/objective evaluator.
   Its output equals the original interval evaluator, with at most `k(21n+45)`
@@ -158,6 +166,14 @@ by Xi Qin (Wuhan University).
   when testing zero and compute predecessor in at most `12*(bits(n)+1)` primitive
   actions. These components still need whole-program bit-machine assembly,
   including code generation, scratch allocation and nested counter storage.
+  A register-to-counter component now reads natural-valued rational registers,
+  uses the reader's numerator stack as the counter, and physically clears the
+  denominator. Its cost is at most `45*T + 30*L(n) + 180`; zero testing and
+  predecessor continue on the same counter stacks. The actual initializer's
+  precision and fuel registers are proved natural and in bounds, so their
+  counter loads need no supplied naturalness certificate. The input tape here
+  encodes the source initializer's output; binary execution of that initializer,
+  arbitrary rational floor conversion and nested loop control remain separate.
 - **Gaussian calculations.** Exact linear and diagonal quadratic exponential
   integrals, orthogonal invariance of the standard Gaussian vector, and the
   finite-sign/Gaussian interchange used in the signed-matrix argument. Quadratic
@@ -277,6 +293,8 @@ covering all branches and a reordered reference. The audited proofs use only
 | [BinaryMultiplierBound.lean](IdentityTesting/BinaryMultiplierBound.lean) | Fixed-stack multiplication machine and cost bound |
 | [BinaryRationalNormalization.lean](IdentityTesting/BinaryRationalNormalization.lean) | Actual fraction reduction, canonical outputs and cubic bit cost |
 | [BinaryInterpreterOperandExecuteInstances.lean](IdentityTesting/BinaryInterpreterOperandExecuteInstances.lean) | Encoded reg/literal operands through all six operations, writeback and physical cleanup |
+| [BinaryInterpreterDispatchRuns.lean](IdentityTesting/BinaryInterpreterDispatchRuns.lean) | Runtime instruction decoding and fixed-pool execution with exact source instruction semantics |
+| [BinaryInterpreterCounterInputPrepared.lean](IdentityTesting/BinaryInterpreterCounterInputPrepared.lean) | Actual initialized precision/fuel register loads into binary counters |
 | [OracleExactStopping.lean](IdentityTesting/OracleExactStopping.lean) | Aggregate elasticities, parameter ratios and exact stopping windows |
 | [HeavyRestrictedSupport.lean](IdentityTesting/HeavyRestrictedSupport.lean) | Lower bounds for alternatives on the positive support |
 | [EffectiveCountableCertificates.lean](IdentityTesting/EffectiveCountableCertificates.lean) | Executable countable intervals and endpoint convergence |
