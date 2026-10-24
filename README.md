@@ -111,6 +111,10 @@ by Xi Qin (Wuhan University).
   rational literal bodies and tags from an existing code tape, preserving a
   history that a symbol-by-symbol rewind routine restores. Their costs include
   the field movements; initial code-tape generation is not yet implemented.
+  Literal payloads can write directly into either physical input of each of the
+  six arithmetic primitives, preserving the other input and emptying the loader
+  temporary stack. Six fixed groups use 427 physical stacks; rearming preserves
+  all their contents and resets only finite control.
 - **Actual rational instruction traces.** A finite-register program implements
   coordinate bisection and the complete finite-vector budget/objective evaluator.
   Its output equals the original interval evaluator, with at most `k(21n+45)`
@@ -146,7 +150,11 @@ by Xi Qin (Wuhan University).
   The actual Gram quadratic form and trace agree with the squared Euclidean and
   Frobenius norms, and the Euclidean operator norm is bounded by the Frobenius norm.
   The squared-matrix-norm exponential is integrable under the corresponding
-  Frobenius bound. The matrix determinant form is still being completed.
+  Frobenius bound. The exact integral also equals
+  `1/sqrt(det(I-t^2 M^T M))`. For real symmetric `M` with `n*||M||F <= 1/2`,
+  the signed average is bounded by `1/sqrt(det(I-n^2 M^2))`, which is at most
+  `exp(n^2 ||M||F^2)`. The determinant is positive and the Gaussian integrand is
+  integrable under these hypotheses.
 
 The statistical proof constructs tests for the point-mass, allocation, moment,
 and heavy-atom interior/exterior regimes, then transfers finite results to

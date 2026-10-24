@@ -643,3 +643,46 @@ open IdentityTesting.RationalComputation
 #print axioms IdentityTesting.BinaryCodeMaterialization.materialize_address
 #check @IdentityTesting.BinaryCodeMaterialization.materialize_tag
 #print axioms IdentityTesting.BinaryCodeMaterialization.materialize_tag
+
+open IdentityTesting.GeneralSignedMatrix
+#print standardGaussianVector
+#print frobeniusSq
+#print frobeniusNorm
+#check @hermitian_det_one_sub
+#print axioms hermitian_det_one_sub
+#check @posSemidef_inverse_sqrt_det_le_exp_trace
+#print axioms posSemidef_inverse_sqrt_det_le_exp_trace
+#check @gaussian_matrix_quadratic_integral
+#print axioms gaussian_matrix_quadratic_integral
+#check @gaussian_matrix_quadratic_integrable
+#print axioms gaussian_matrix_quadratic_integrable
+#check @gaussian_norm_integral
+#print axioms gaussian_norm_integral
+#check @gaussian_norm_integrable
+#print axioms gaussian_norm_integrable
+#check @gaussian_pi_norm_integral
+#print axioms gaussian_pi_norm_integral
+#check @gaussian_pi_norm_integrable
+#print axioms gaussian_pi_norm_integrable
+#check @symmetric_signed_gaussian_determinant_bound
+#print axioms symmetric_signed_gaussian_determinant_bound
+#check @manuscript_signed_gaussian_comparison
+#print axioms manuscript_signed_gaussian_comparison
+
+#print IdentityTesting.BinaryInterpreterLayout.InputLocal
+#print IdentityTesting.BinaryInterpreterLiteralInput.step
+#check @IdentityTesting.BinaryInterpreterArithmetic.arithmeticInputLocal
+#print axioms IdentityTesting.BinaryInterpreterArithmetic.arithmeticInputLocal
+#check @IdentityTesting.BinaryInterpreterLiteralInput.literal_into_input
+#print axioms IdentityTesting.BinaryInterpreterLiteralInput.literal_into_input
+#check @IdentityTesting.BinaryInterpreterLiteralInput.arithmetic_literal_into_input
+#print axioms IdentityTesting.BinaryInterpreterLiteralInput.arithmetic_literal_into_input
+#check @IdentityTesting.BinaryInterpreterLiteralInput.other_input_step
+#print axioms IdentityTesting.BinaryInterpreterLiteralInput.other_input_step
+#print IdentityTesting.BinaryInterpreterPool.Pool
+#check @IdentityTesting.BinaryInterpreterPool.physical_stack_count
+#print axioms IdentityTesting.BinaryInterpreterPool.physical_stack_count
+#check @IdentityTesting.BinaryInterpreterPool.rearm_tapes
+#print axioms IdentityTesting.BinaryInterpreterPool.rearm_tapes
+#check @IdentityTesting.BinaryInterpreterPool.rearm_selected_initial
+#print axioms IdentityTesting.BinaryInterpreterPool.rearm_selected_initial

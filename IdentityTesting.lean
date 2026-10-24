@@ -163,3 +163,6 @@ import IdentityTesting.RationalProgramTapeCodeProperties
 import IdentityTesting.BinaryRationalArithmeticNatCounter
 import IdentityTesting.BinaryCodeMaterialization
 import IdentityTesting.BinaryCodeRewind
+import IdentityTesting.GaussianManuscriptBridge
+import IdentityTesting.BinaryInterpreterLiteralInput
+import IdentityTesting.BinaryInterpreterPool
