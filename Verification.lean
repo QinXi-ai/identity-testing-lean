@@ -686,3 +686,15 @@ open IdentityTesting.GeneralSignedMatrix
 #print axioms IdentityTesting.BinaryInterpreterPool.rearm_tapes
 #check @IdentityTesting.BinaryInterpreterPool.rearm_selected_initial
 #print axioms IdentityTesting.BinaryInterpreterPool.rearm_selected_initial
+
+#print IdentityTesting.BinaryInterpreterCeilSize.layout
+#check @IdentityTesting.BinaryInterpreterCeilSize.local_run
+#print axioms IdentityTesting.BinaryInterpreterCeilSize.local_run
+#check @IdentityTesting.BinaryInterpreterCeilSize.binary_register_ceilSize
+#print axioms IdentityTesting.BinaryInterpreterCeilSize.binary_register_ceilSize
+#check @IdentityTesting.BinaryInterpreterCeilSize.storage
+#print axioms IdentityTesting.BinaryInterpreterCeilSize.storage
+#check @IdentityTesting.BinaryInterpreterCeilSize.binary_register_ceilSize_with_cleanup
+#print axioms IdentityTesting.BinaryInterpreterCeilSize.binary_register_ceilSize_with_cleanup
+#check @IdentityTesting.BinaryInterpreterCeilSize.rearm_clean
+#print axioms IdentityTesting.BinaryInterpreterCeilSize.rearm_clean

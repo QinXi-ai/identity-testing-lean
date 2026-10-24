@@ -115,6 +115,12 @@ by Xi Qin (Wuhan University).
   six arithmetic primitives, preserving the other input and emptying the loader
   temporary stack. Six fixed groups use 427 physical stacks; rearming preserves
   all their contents and resets only finite control.
+  The ceiling-size control operation also uses the shared register interpreter:
+  load, compute, writeback and physical cleanup cost at most
+  `2400*T + 9000000*(L+1)^2`. It supports a source equal to its destination,
+  clears all 31 core stacks and all IO stacks, and can be rearmed for reuse.
+  This implementation counts a second source load into an auxiliary input word;
+  its 31 stacks are separate from the six arithmetic groups above.
 - **Actual rational instruction traces.** A finite-register program implements
   coordinate bisection and the complete finite-vector budget/objective evaluator.
   Its output equals the original interval evaluator, with at most `k(21n+45)`

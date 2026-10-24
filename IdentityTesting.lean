@@ -166,3 +166,4 @@ import IdentityTesting.BinaryCodeRewind
 import IdentityTesting.GaussianManuscriptBridge
 import IdentityTesting.BinaryInterpreterLiteralInput
 import IdentityTesting.BinaryInterpreterPool
+import IdentityTesting.BinaryInterpreterCeilSizeClean
